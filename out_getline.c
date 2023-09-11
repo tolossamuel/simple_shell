@@ -21,7 +21,7 @@ int _getline(data_of_program *data)
 
 		i = 0;
 		do {
-			array_commands[i] = string_repetitions(_strtok(i ? NULL : buff, "\n;"));
+			array_commands[i] = string_repetitions(str_tok(i ? NULL : buff, "\n;"));
 			i = logic_ops(array_commands, i, array_operators);
 		} while (array_commands[i++]);
 	}
@@ -33,5 +33,41 @@ int _getline(data_of_program *data)
 	}
 
 	return (string_size(data->get_line));
+}
+
+char *str_tok(char *line, char *delim)
+{
+	int j;
+	static char *str;
+	char *copy_str;
+
+	if (line != NULL)
+		str = line;
+	for (; *str != '\0'; str++)
+	{
+		for (j = 0; delim[j] != '\0'; j++)
+		{
+			if (*str == delim[j])
+			break;
+		}
+		if (delim[j] == '\0')
+			break;
+	}
+	copy_str = str;
+	if (*copy_str == '\0')
+		return (NULL);
+	for (; *str != '\0'; str++)
+	{
+		for (j = 0; delim[j] != '\0'; j++)
+		{
+			if (*str == delim[j])
+			{
+				*str = '\0';
+				str++;
+				return (copy_str);
+			}
+		}
+	}
+	return (copy_str);
 }
 

@@ -1,4 +1,5 @@
 #include "shell.h"
+#include "main.h"
 
 int builtins_list(data_of_program *data)
 {
@@ -14,7 +15,7 @@ int builtins_list(data_of_program *data)
 		{NULL, NULL}
 	};
 	int nums;
-	
+
 	for (nums = 0; menu_list[nums].built_in != NULL; nums++)
 	{
 		if (string_comparions(menu_list[nums].built_in, data->cmd_name, 0))

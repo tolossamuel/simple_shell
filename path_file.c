@@ -64,10 +64,10 @@ char **path_of_file(data_of_program *data)
 	}
 	tokens = malloc(sizeof(char *) * counter_directories);
 	i = 0;
-	tokens[i] = string_repetitions(_strtok(PATH, ":"));
+	tokens[i] = string_repetitions(str_tok(PATH, ":"));
 	while (tokens[i++])
 	{
-		tokens[i] = string_repetitions(_strtok(NULL, ":"));
+		tokens[i] = string_repetitions(str_tok(NULL, ":"));
 	}
 
 	free(PATH);

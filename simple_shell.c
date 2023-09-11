@@ -86,7 +86,7 @@ void size_(char *prompt, data_of_program *data)
 		{
 			expand_alias(data);
 			var_expand(data);
-			tokenize(data);
+			tokenize_data(data);
 			if (data->tokens[0])
 			{ /* if a text is given to prompt, execute */
 				error_code = executed(data);
