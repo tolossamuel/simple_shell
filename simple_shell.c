@@ -4,7 +4,7 @@
 
 int main(int argc, char *argv[], char *env[])
 {
-	data_of_program data_struct = {NULL}, *data = &data_struct;
+	data_of_program stru_data = {NULL}, *data = &stru_data;
 	char *prompt = "";
 	
 	start_with(data, argc, argv, env);
@@ -20,7 +20,7 @@ int main(int argc, char *argv[], char *env[])
 	size_of_(prompt, data);
 	return (0);
 }
-void handle_short_cut(int opr UNUSED)
+void handle_short_cut(int operations UNUSED)
 {
 	_print("\n");
 	_print(PROMPT_MSG);
@@ -43,7 +43,7 @@ void start_with(data_of_program *data, int argc, char *argv[], char **env)
 		if (data->file_desc == -1)
 		{
 			_printe(data->Name_projects);
-			_printe(": 0: Can't open ");
+			_printe(": 0: does not open ");
 			_printe(argv[1]);
 			_printe("\n");
 			exit(127);
@@ -80,7 +80,7 @@ void size_of_(char *prompt, data_of_program *data)
 		if (error_code == EOF)
 		{
 			free_all(data);
-			exit(errno); /* if EOF is the fisrt Char of string, exit*/
+			exit(errno); 
 		}
 		if (string_len >= 1)
 		{
@@ -88,7 +88,7 @@ void size_of_(char *prompt, data_of_program *data)
 			var_expand(data);
 			tokenize_data(data);
 			if (data->tokens[0])
-			{ /* if a text is given to prompt, execute */
+			{
 				error_code = executed(data);
 				if (error_code != 0)
 					handle_error(error_code, data);
