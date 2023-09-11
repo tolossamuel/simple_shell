@@ -1,20 +1,15 @@
 #include "shell.h"
 
-/**
- * builtin_exit - exit of the program with the status
- * @data: struct for the program's data
- * Return: zero if sucess, or other number if its declared in the arguments
- */
-int builtin_exit(data_of_program *data)
+int exit_env(data_of_program *data)
 {
 	int i;
 
 	if (data->tokens[1] != NULL)
-	{/*if exists arg for exit, check if is a number*/
+	{
 		for (i = 0; data->tokens[1][i]; i++)
 			if ((data->tokens[1][i] < '0' || data->tokens[1][i] > '9')
 				&& data->tokens[1][i] != '+')
-			{/*if is not a number*/
+			{
 				errno = 2;
 				return (2);
 			}
@@ -24,12 +19,7 @@ int builtin_exit(data_of_program *data)
 	exit(errno);
 }
 
-/**
- * builtin_cd - change the current directory
- * @data: struct for the program's data
- * Return: zero if sucess, or other number if its declared in the arguments
- */
-int builtin_cd(data_of_program *data)
+int command_built(data_of_program *data)
 {
 	char *dir_home = get_key("HOME", data), *dir_old = NULL;
 	char old_dir[128] = {0};
@@ -41,7 +31,7 @@ int builtin_cd(data_of_program *data)
 		{
 			dir_old = get_key("OLDPWD", data);
 			if (dir_old)
-				error_code = set_work_directory(data, dir_old);
+				error_code = set_dir(data, dir_old);
 			_print(get_key("PWD", data));
 			_print("\n");
 
@@ -49,7 +39,7 @@ int builtin_cd(data_of_program *data)
 		}
 		else
 		{
-			return (set_work_directory(data, data->tokens[1]));
+			return (set_dir(data, data->tokens[1]));
 		}
 	}
 	else
@@ -57,18 +47,12 @@ int builtin_cd(data_of_program *data)
 		if (!dir_home)
 			dir_home = getcwd(old_dir, 128);
 
-		return (set_work_directory(data, dir_home));
+		return (set_dir(data, dir_home));
 	}
 	return (0);
 }
 
-/**
- * set_work_directory - set the work directory
- * @data: struct for the program's data
- * @new_dir: path to be set as work directory
- * Return: zero if sucess, or other number if its declared in the arguments
- */
-int set_work_directory(data_of_program *data, char *new_dir)
+int set_dir(data_of_program *data, char *new_dir)
 {
 	char old_dir[128] = {0};
 	int err_code = 0;
@@ -89,22 +73,17 @@ int set_work_directory(data_of_program *data, char *new_dir)
 	return (0);
 }
 
-/**
- * builtin_help - shows the environment where the shell runs
- * @data: struct for the program's data
- * Return: zero if sucess, or other number if its declared in the arguments
- */
-int builtin_help(data_of_program *data)
+int help_builtin(data_of_program *data)
 {
 	int i, length = 0;
-	char *mensajes[6] = {NULL};
+	char *messages[6] = {NULL};
 
-	mensajes[0] = HELP_MSG;
+	messages[0] = HELP_MSG;
 
 	/* validate args */
 	if (data->tokens[1] == NULL)
 	{
-		_print(mensajes[0] + 6);
+		_print(messages[0] + 6);
 		return (1);
 	}
 	if (data->tokens[2] != NULL)
@@ -113,18 +92,18 @@ int builtin_help(data_of_program *data)
 		perror(data->cmd_name);
 		return (5);
 	}
-	mensajes[1] = HELP_EXIT_MSG;
-	mensajes[2] = HELP_ENV_MSG;
-	mensajes[3] = HELP_SETENV_MSG;
-	mensajes[4] = HELP_UNSETENV_MSG;
-	mensajes[5] = HELP_CD_MSG;
+	messages[1] = HELP_EXIT_MSG;
+	messages[2] = HELP_ENV_MSG;
+	messages[3] = HELP_SETENV_MSG;
+	messages[4] = HELP_UNSETENV_MSG;
+	messages[5] = HELP_CD_MSG;
 
-	for (i = 0; mensajes[i]; i++)
+	for (i = 0; messages[i]; i++)
 	{
 		length = string_size(data->tokens[1]);
-		if (string_comparions(data->tokens[1], mensajes[i], length))
+		if (string_comparions(data->tokens[1], messages[i], length))
 		{
-			_print(mensajes[i] + length + 1);
+			_print(messages[i] + length + 1);
 			return (1);
 		}
 	}
@@ -134,23 +113,16 @@ int builtin_help(data_of_program *data)
 	return (0);
 }
 
-/**
- * builtin_alias - add, remove or show aliases
- * @data: struct for the program's data
- * Return: zero if sucess, or other number if its declared in the arguments
- */
 int builtin_alias(data_of_program *data)
 {
 	int i = 0;
-
-	/* if there are no arguments, print all environment */
 	if (data->tokens[1] == NULL)
 		return (printf_fun(data, NULL));
 
 	while (data->tokens[++i])
-	{/* if there are arguments, set or print each env variable*/
+	{
 		if (size_characters(data->tokens[i], "="))
-			set_functions(data->tokens[i], data);
+			set_fun(data->tokens[i], data);
 		else
 			printf_fun(data, data->tokens[i]);
 	}

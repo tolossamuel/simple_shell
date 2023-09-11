@@ -60,7 +60,7 @@ void expand_alias(data_of_program *data)
 			expansion[j] = line[i + j];
 		expansion[j] = '\0';
 
-		temp = get_functions(data, expansion);
+		temp = get_fun(data, expansion);
 		if (temp)
 		{
 			expansion[0] = '\0';

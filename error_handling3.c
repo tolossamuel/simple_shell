@@ -25,9 +25,9 @@ int handle_error(int error_code, data_of_program *data)
 		_printe(": ");
 		_printe(data->tokens[0]);
 		if (error_code == 2)
-			_printe(": Illegal number: ");
+			_printe(": unexpected number: ");
 		else
-			_printe(": can't cd to ");
+			_printe(": can not redirect to ");
 		_printe(data->tokens[1]);
 		_printe("\n");
 	}

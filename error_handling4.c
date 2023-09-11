@@ -16,7 +16,7 @@ int string_size(char *string)
 char *string_repetitions(char *string)
 {
 	char *result;
-	int length, i;
+	int length, num1;
 
 	if (string == NULL)
 		return (NULL);
@@ -31,9 +31,9 @@ char *string_repetitions(char *string)
 		perror("Error");
 		return (NULL);
 	}
-	for (i = 0; i < length ; i++)
+	for (num1 = 0; num1 < length ; num1++)
 	{
-		result[i] = string[i];
+		result[num1] = string[num1];
 	}
 
 	return (result);
@@ -88,7 +88,7 @@ char *string_merging(char *string1, char *string2)
 	if (result == NULL)
 	{
 		errno = ENOMEM;
-		perror("Error");
+		perror("ERROR");
 		return (NULL);
 	}
 
@@ -110,13 +110,13 @@ char *string_merging(char *string1, char *string2)
 void reverse(char *string)
 {
 
-	int i = 0, length = string_size(string) - 1;
+	int num1 = 0, length = string_size(string) - 1;
 	char hold;
 
-	while (i < length)
+	while (num1 < length)
 	{
-		hold = string[i];
-		string[i++] = string[length];
+		hold = string[num1];
+		string[num1++] = string[length];
 		string[length--] = hold;
 	}
 }

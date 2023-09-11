@@ -2,20 +2,20 @@
 
 int env_builders(data_of_program *data)
 {
-	int i;
+	int num1;
 	char cmd_name[50] = {'\0'};
 	char *var_copy = NULL;
 	if (data->tokens[1] == NULL)
 		env_print(data);
 	else
 	{
-		for (i = 0; data->tokens[1][i]; i++)
+		for (num1 = 0; data->tokens[1][num1]; num1++)
 		{
-			if (data->tokens[1][i] == '=')
+			if (data->tokens[1][num1] == '=')
 			{
 				var_copy = string_repetitions(get_key(cmd_name, data));
 				if (var_copy != NULL)
-					set_key(cmd_name, data->tokens[1] + i + 1, data);
+					set_key(cmd_name, data->tokens[1] + num1 + 1, data);
 
 				
 				env_print(data);
@@ -31,7 +31,7 @@ int env_builders(data_of_program *data)
 				}
 				return (0);
 			}
-			cmd_name[i] = data->tokens[1][i];
+			cmd_name[num1] = data->tokens[1][num1];
 		}
 		errno = 2;
 		perror(data->cmd_name);

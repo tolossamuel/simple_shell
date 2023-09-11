@@ -1,7 +1,7 @@
 #ifndef HELPERS_H
 #define HELPERS_H
 
-#define PROMPT_MSG "$ "
+#define PROMPT_MSG "#NaolSamuel$ "
 
 #define UNUSED __attribute__((unused))
 #define BUFFER_SIZE 1024

@@ -28,12 +28,12 @@ void free_all(data_of_program *data)
 
 void free_array_pointes(char **array)
 {
-	int i;
+	int num1;
 
 	if (array != NULL)
 	{
-		for (i = 0; array[i]; i++)
-			free(array[i]);
+		for (num1 = 0; array[num1]; num1++)
+			free(array[num1]);
 
 		free(array);
 		array = NULL;

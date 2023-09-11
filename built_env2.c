@@ -5,12 +5,12 @@ int builtins_list(data_of_program *data)
 {
 	
 	build_structure menu_list[] = {
-		{"exit", builtin_exit},
+		{"exit", exit_env},
 		{"unsetenv", unset_key},
-		{"cd", builtin_cd},
+		{"cd", command_built},
 		{"alias", builtin_alias},
 		{"env", env_builders},
-		{"help", builtin_help},
+		{"help", help_builtin},
 		{"setenv", builder_set_key},
 		{NULL, NULL}
 	};

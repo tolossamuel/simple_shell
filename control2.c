@@ -3,17 +3,18 @@
 
 char *get_key(char *key, data_of_program *data)
 {
-	int i, key_length = 0;
+	int num1;
+	int key_length = 0;
 	if (key == NULL || data->env == NULL)
 		return (NULL);
 	key_length = string_size(key);
 
-	for (i = 0; data->env[i]; i++)
+	for (num1 = 0; data->env[num1]; num1++)
 	{
-		if (string_comparions(key, data->env[i], key_length) &&
-		 data->env[i][key_length] == '=')
+		if (string_comparions(key, data->env[num1], key_length) &&
+		 data->env[num1][key_length] == '=')
 		{
-			return (data->env[i] + key_length + 1);
+			return (data->env[num1] + key_length + 1);
 		}
 	}
 	return (NULL);
@@ -50,24 +51,25 @@ int set_key(char *key, char *value, data_of_program *data)
 
 int remove_key(char *key, data_of_program *data)
 {
-	int i, key_length = 0;
+	int num1;
+	int key_length = 0;
 	if (key == NULL || data->env == NULL)
 		return (0);
 
 	key_length = string_size(key);
 
-	for (i = 0; data->env[i]; i++)
+	for (num1 = 0; data->env[num1]; num1++)
 	{
-		if (string_comparions(key, data->env[i], key_length) &&
-		 data->env[i][key_length] == '=')
+		if (string_comparions(key, data->env[num1], key_length) &&
+		 data->env[num1][key_length] == '=')
 		{
-			free(data->env[i]);
-			i++;
-			for (; data->env[i]; i++)
+			free(data->env[num1]);
+			num1++;
+			for (; data->env[num1]; num1++)
 			{
-				data->env[i - 1] = data->env[i];
+				data->env[num1 - 1] = data->env[num1];
 			}
-			data->env[i - 1] = NULL;
+			data->env[num1 - 1] = NULL;
 			return (1);
 		}
 	}
@@ -76,11 +78,11 @@ int remove_key(char *key, data_of_program *data)
 
 void env_print(data_of_program *data)
 {
-	int j;
+	int num1;
 
-	for (j = 0; data->env[j]; j++)
+	for (num1 = 0; data->env[num1]; num1++)
 	{
-		_print(data->env[j]);
+		_print(data->env[num1]);
 		_print("\n");
 	}
 }

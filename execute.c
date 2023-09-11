@@ -2,15 +2,15 @@
 
 int executed(data_of_program *data)
 {
-	int retval = 0, status;
+	int num1 = 0, status;
 	pid_t pid;
-	retval = builtins_list(data);
-	if (retval != -1)
-		return (retval);
-	retval = search_file(data);
-	if (retval)
+	num1 = builtins_list(data);
+	if (num1 != -1)
+		return (num1);
+	num1 = search_file(data);
+	if (num1)
 	{
-		return (retval);
+		return (num1);
 	}
 	else
 	{
@@ -22,8 +22,8 @@ int executed(data_of_program *data)
 		}
 		if (pid == 0)
 		{
-			retval = execve(data->tokens[0], data->tokens, data->env);
-			if (retval == -1) 
+			num1 = execve(data->tokens[0], data->tokens, data->env);
+			if (num1 == -1) 
 				perror(data->cmd_name), exit(EXIT_FAILURE);
 		}
 		else
