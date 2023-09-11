@@ -7,7 +7,7 @@ int executed(data_of_program *data)
 	retval = builtins_list(data);
 	if (retval != -1)
 		return (retval);
-	retval = find(data);
+	retval = search_file(data);
 	if (retval)
 	{
 		return (retval);

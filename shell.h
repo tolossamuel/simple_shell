@@ -30,16 +30,16 @@ typedef struct about
 } data_of_program;
 
 
-typedef struct builtins
+typedef struct build_structure
 {
 	char *built_in;
 	int (*function)(data_of_program *data);
-} builtins;
-void first_data(data_of_program *data, int arc, char *argv[], char **env);
-void size_(char *prompt, data_of_program *data);
-void handle_ctrl_c(int opr UNUSED);
+} build_structure;
+void start_with(data_of_program *data, int arc, char *argv[], char **env);
+void size_of_(char *prompt, data_of_program *data);
+void handle_short_cut(int opr UNUSED);
 int _getline(data_of_program *data);
-int logic_ops(char *array_commands[], int i, char array_operators[]);
+int logical_operations(char *array_commands[], int i, char array_operators[]);
 void var_expand(data_of_program *data);
 void expand_alias(data_of_program *data);
 int new_buffer(char *buffer, char *str_to_add);
@@ -48,7 +48,7 @@ char *str_tok(char *line, char *delim);
 int executed(data_of_program *data);
 int builtins_list(data_of_program *data);
 char **path_of_file(data_of_program *data);
-int find(data_of_program *data);
+int search_file(data_of_program *data);
 void free_array_pointes(char **directories);
 void free_data(data_of_program *data);
 void free_all(data_of_program *data);
@@ -71,11 +71,11 @@ int string_size(char *string);
 char *string_repetitions(char *string);
 int string_comparions(char *string1, char *string2, int number);
 char *string_merging(char *string1, char *string2);
-void string_reverse(char *string);
+void reverse(char *string);
 void string_long(long number, char *string, int base);
 int _atoi(char *s);
 int size_characters(char *string, char *character);
-int print_functions(data_of_program *data, char *alias);
+int printf_fun(data_of_program *data, char *alias);
 char *get_functions(data_of_program *data, char *alias);
 int set_functions(char *alias_string, data_of_program *data);
 int check(char *full_path);

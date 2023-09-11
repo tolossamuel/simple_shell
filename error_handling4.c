@@ -107,7 +107,7 @@ char *string_merging(char *string1, char *string2)
 }
 
 
-void string_reverse(char *string)
+void reverse(char *string)
 {
 
 	int i = 0, length = string_size(string) - 1;

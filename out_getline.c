@@ -22,7 +22,7 @@ int _getline(data_of_program *data)
 		i = 0;
 		do {
 			array_commands[i] = string_repetitions(str_tok(i ? NULL : buff, "\n;"));
-			i = logic_ops(array_commands, i, array_operators);
+			i = logical_operations(array_commands, i, array_operators);
 		} while (array_commands[i++]);
 	}
 	data->get_line = array_commands[0];

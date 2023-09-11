@@ -145,14 +145,14 @@ int builtin_alias(data_of_program *data)
 
 	/* if there are no arguments, print all environment */
 	if (data->tokens[1] == NULL)
-		return (print_functions(data, NULL));
+		return (printf_fun(data, NULL));
 
 	while (data->tokens[++i])
 	{/* if there are arguments, set or print each env variable*/
 		if (size_characters(data->tokens[i], "="))
 			set_functions(data->tokens[i], data);
 		else
-			print_functions(data, data->tokens[i]);
+			printf_fun(data, data->tokens[i]);
 	}
 
 	return (0);

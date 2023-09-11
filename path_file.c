@@ -3,7 +3,7 @@
 
 
 
-int find(data_of_program *data)
+int search_file(data_of_program *data)
 {
 	int i = 0, ret_code = 0;
 	char **directories;

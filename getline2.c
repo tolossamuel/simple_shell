@@ -1,6 +1,6 @@
 #include "shell.h"
 
-int logic_ops(char *cmd_array[], int num, char ops_ary[])
+int logical_operations(char *cmd_array[], int num, char ops_ary[])
 {
 	
 	int var;

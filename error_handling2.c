@@ -24,7 +24,7 @@ void string_long(long number, char *string, int base)
 		string[index++] = '-';
 
 	string[index] = '\0';
-	string_reverse(string);
+	reverse(string);
 }
 
 

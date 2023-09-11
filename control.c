@@ -1,6 +1,6 @@
 #include "shell.h"
 
-int print_functions(data_of_program *data, char *alias)
+int printf_fun(data_of_program *data, char *alias)
 {
 	int i, j, alias_length;
 	char buffer[250] = {'\0'};

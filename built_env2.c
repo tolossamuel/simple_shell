@@ -4,7 +4,7 @@
 int builtins_list(data_of_program *data)
 {
 	
-	builtins menu_list[] = {
+	build_structure menu_list[] = {
 		{"exit", builtin_exit},
 		{"unsetenv", unset_key},
 		{"cd", builtin_cd},

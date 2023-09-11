@@ -7,9 +7,9 @@ int main(int argc, char *argv[], char *env[])
 	data_of_program data_struct = {NULL}, *data = &data_struct;
 	char *prompt = "";
 	
-	first_data(data, argc, argv, env);
+	start_with(data, argc, argv, env);
 
-	signal(SIGINT, handle_ctrl_c);
+	signal(SIGINT, handle_short_cut);
 
 	if (isatty(STDIN_FILENO) && isatty(STDOUT_FILENO) && argc == 1)
 	{
@@ -17,16 +17,16 @@ int main(int argc, char *argv[], char *env[])
 		prompt = PROMPT_MSG;
 	}
 	errno = 0;
-	size_(prompt, data);
+	size_of_(prompt, data);
 	return (0);
 }
-void handle_ctrl_c(int opr UNUSED)
+void handle_short_cut(int opr UNUSED)
 {
 	_print("\n");
 	_print(PROMPT_MSG);
 }
 
-void first_data(data_of_program *data, int argc, char *argv[], char **env)
+void start_with(data_of_program *data, int argc, char *argv[], char **env)
 {
 	int i = 0;
 
@@ -68,7 +68,7 @@ void first_data(data_of_program *data, int argc, char *argv[], char **env)
 	}
 }
 
-void size_(char *prompt, data_of_program *data)
+void size_of_(char *prompt, data_of_program *data)
 {
 	int error_code = 0, string_len = 0;
 
