@@ -1,5 +1,25 @@
 #include "shell.h"
 
+char *get_fun(data_of_program *data, char *name)
+{
+	int num1, alias_length;
+	if (name == NULL || data->alias_list == NULL)
+		return (NULL);
+
+	alias_length = string_size(name);
+
+	for (num1 = 0; data->alias_list[num1]; num1++)
+	{
+		if (string_comparions(name, data->alias_list[num1], alias_length) &&
+			data->alias_list[num1][alias_length] == '=')
+		{
+			return (data->alias_list[num1] + alias_length + 1);
+		}
+	}
+	return (NULL);
+
+}
+
 int printf_fun(data_of_program *data, char *alias)
 {
 	int num1;
@@ -31,25 +51,6 @@ int printf_fun(data_of_program *data, char *alias)
 	}
 
 	return (0);
-}
-char *get_fun(data_of_program *data, char *name)
-{
-	int num1, alias_length;
-	if (name == NULL || data->alias_list == NULL)
-		return (NULL);
-
-	alias_length = string_size(name);
-
-	for (num1 = 0; data->alias_list[num1]; num1++)
-	{
-		if (string_comparions(name, data->alias_list[num1], alias_length) &&
-			data->alias_list[num1][alias_length] == '=')
-		{
-			return (data->alias_list[num1] + alias_length + 1);
-		}
-	}
-	return (NULL);
-
 }
 
 int set_fun(char *alias_string, data_of_program *data)

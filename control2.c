@@ -49,6 +49,16 @@ int set_key(char *key, char *value, data_of_program *data)
 }
 
 
+void env_print(data_of_program *data)
+{
+	int num1;
+
+	for (num1 = 0; data->env[num1]; num1++)
+	{
+		_print(data->env[num1]);
+		_print("\n");
+	}
+}
 int remove_key(char *key, data_of_program *data)
 {
 	int num1;
@@ -74,15 +84,4 @@ int remove_key(char *key, data_of_program *data)
 		}
 	}
 	return (0);
-}
-
-void env_print(data_of_program *data)
-{
-	int num1;
-
-	for (num1 = 0; data->env[num1]; num1++)
-	{
-		_print(data->env[num1]);
-		_print("\n");
-	}
 }

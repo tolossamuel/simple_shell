@@ -9,7 +9,7 @@ void free_data(data_of_program *data)
 	if (data->cmd_name)
 		free(data->cmd_name);
 
-	data->get_line = NULL;
+	data->get_line = NULL;	
 	data->cmd_name = NULL;
 	data->tokens = NULL;
 }

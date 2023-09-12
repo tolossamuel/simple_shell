@@ -3,8 +3,8 @@
 int env_builders(data_of_program *data)
 {
 	int num1;
-	char cmd_name[50] = {'\0'};
 	char *var_copy = NULL;
+	char cmd_name[50] = {'\0'};
 	if (data->tokens[1] == NULL)
 		env_print(data);
 	else
@@ -40,22 +40,6 @@ int env_builders(data_of_program *data)
 	return (0);
 }
 
-int builder_set_key(data_of_program *data)
-{
-	if (data->tokens[1] == NULL || data->tokens[2] == NULL)
-		return (0);
-	if (data->tokens[3] != NULL)
-	{
-		errno = E2BIG;
-		perror(data->cmd_name);
-		return (5);
-	}
-
-	set_key(data->tokens[1], data->tokens[2], data);
-
-	return (0);
-}
-
 
 int unset_key(data_of_program *data)
 {
@@ -68,6 +52,23 @@ int unset_key(data_of_program *data)
 		return (5);
 	}
 	remove_key(data->tokens[1], data);
+
+	return (0);
+}
+
+
+int builder_set_key(data_of_program *data)
+{
+	if (data->tokens[1] == NULL || data->tokens[2] == NULL)
+		return (0);
+	if (data->tokens[3] != NULL)
+	{
+		errno = E2BIG;
+		perror(data->cmd_name);
+		return (5);
+	}
+
+	set_key(data->tokens[1], data->tokens[2], data);
 
 	return (0);
 }

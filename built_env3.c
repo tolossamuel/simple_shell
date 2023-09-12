@@ -2,22 +2,26 @@
 
 int exit_env(data_of_program *data)
 {
-	int i;
+	int num1;
 
 	if (data->tokens[1] != NULL)
 	{
-		for (i = 0; data->tokens[1][i]; i++)
-			if ((data->tokens[1][i] < '0' || data->tokens[1][i] > '9')
-				&& data->tokens[1][i] != '+')
+		for (num1 = 0; data->tokens[1][num1]; num1++)
+			if ((data->tokens[1][num1] < '0' || data->tokens[1][num1] > '9')
+				&& data->tokens[1][num1] != '+')
 			{
 				errno = 2;
 				return (2);
 			}
 		errno = _atoi(data->tokens[1]);
 	}
-	free_all(data);
+	
+	if (data != NULL) {
+		free_all(data);
+	}
 	exit(errno);
 }
+
 
 int command_built(data_of_program *data)
 {
@@ -69,7 +73,7 @@ int set_dir(data_of_program *data, char *new_dir)
 		}
 		set_key("PWD", new_dir, data);
 	}
-	set_key("OLDPWD", old_dir, data);
+	set_key("OLDPW", old_dir, data);
 	return (0);
 }
 
