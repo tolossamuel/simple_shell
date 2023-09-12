@@ -4,7 +4,7 @@ int executed(data_of_program *data)
 {
 	int num1 = 0, status;
 	pid_t pid;
-	num1 = builtins_list(data);
+	num1 = built_list(data);
 	if (num1 != -1)
 		return (num1);
 	num1 = search_file(data);
