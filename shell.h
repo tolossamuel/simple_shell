@@ -46,7 +46,7 @@ void start_with(program_info *info, int arc, char *argv[], char **env);
 void size_of_(char *prompt, program_info *info);
 void handle_short_cut(int opr UNUSED);
 int _getline(program_info *info);
-int logical_operations(char *array_commands[], int num, char array_operators[]);
+int logical_operations(char *cmd_array[], int num, char ops_ary[]);
 void var_expand(program_info *info);
 void expand_alias(program_info *info);
 int new_buffer(char *buffer, char *str_to_add);

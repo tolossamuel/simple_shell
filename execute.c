@@ -15,17 +15,18 @@ int executed(program_info *info)
 	else
 	{
 		pid = fork(); 
-		if (pid == -1)
-		{ 
-			perror(info->cmd_name);
-			exit(EXIT_FAILURE);
-		}
 		if (pid == 0)
 		{
 			num1 = execve(info->tokens[0], info->tokens, info->env);
 			if (num1 == -1) 
 				perror(info->cmd_name), exit(EXIT_FAILURE);
 		}
+		if (pid == -1)
+		{ 
+			perror(info->cmd_name);
+			exit(EXIT_FAILURE);
+		}
+		
 		else
 		{
 			wait(&status);

@@ -33,38 +33,38 @@ int logical_operations(char *cmd_array[], int num, char ops_ary[])
 	}
 	return (num);
 }
-void tokenize_data(program_info *data)
+void tokenize_data(program_info *info)
 {
-	char *delimiter = " \t";
-	int i, j, counter = 2, length;
+	char *limiter = " \t";
+	int num1, num2, counter = 2, length;
 
-	length = string_size(data->get_line);
+	length = string_size(info->get_line);
 	if (length)
 	{
-		if (data->get_line[length - 1] == '\n')
-			data->get_line[length - 1] = '\0';
+		if (info->get_line[length - 1] == '\n')
+			info->get_line[length - 1] = '\0';
 	}
 
-	for (i = 0; data->get_line[i]; i++)
+	for (num1 = 0; info->get_line[num1]; num1++)
 	{
-		for (j = 0; delimiter[j]; j++)
+		for (num2 = 0; limiter[num2]; num2++)
 		{
-			if (data->get_line[i] == delimiter[j])
+			if (info->get_line[num1] == limiter[num2])
 				counter++;
 		}
 	}
 
-	data->tokens = malloc(counter * sizeof(char *));
-	if (data->tokens == NULL)
+	info->tokens = malloc(counter * sizeof(char *));
+	if (info->tokens == NULL)
 	{
-		perror(data->Name_projects);
+		perror(info->Name_projects);
 		exit(errno);
 	}
-	i = 0;
-	data->tokens[i] = string_repetitions(str_tok(data->get_line, delimiter));
-	data->cmd_name = string_repetitions(data->tokens[0]);
-	while (data->tokens[i++])
+	num1 = 0;
+	info->tokens[num1] = string_repetitions(str_tok(info->get_line, limiter));
+	info->cmd_name = string_repetitions(info->tokens[0]);
+	while (info->tokens[num1++])
 	{
-		data->tokens[i] = string_repetitions(str_tok(NULL, delimiter));
+		info->tokens[num1] = string_repetitions(str_tok(NULL, limiter));
 	}
 }

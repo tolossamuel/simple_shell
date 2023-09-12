@@ -82,13 +82,13 @@ void expand_alias(program_info *info)
 
 int new_buffer(char *buffer, char *concatenate_string)
 {
-	int length, i;
+	int num1, num2;
 
-	length = string_size(buffer);
-	for (i = 0; concatenate_string[i]; i++)
+	num1 = string_size(buffer);
+	for (num2 = 0; concatenate_string[num2]; num2++)
 	{
-		buffer[length + i] = concatenate_string[i];
+		buffer[num1 + num2] = concatenate_string[num2];
 	}
-	buffer[length + i] = '\0';
-	return (length + i);
+	buffer[num1 + num2] = '\0';
+	return (num1 + num2);
 }

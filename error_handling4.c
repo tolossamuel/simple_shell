@@ -2,15 +2,15 @@
 
 int string_size(char *string)
 {
-	int length = 0;
+	int counter = 0;
 
 	if (string == NULL)
 		return (0);
 
-	while (string[length++] != '\0')
+	while (string[counter++] != '\0')
 	{
 	}
-	return (--length);
+	return (counter - 1);
 }
 
 char *string_repetitions(char *string)
@@ -28,7 +28,7 @@ char *string_repetitions(char *string)
 	if (result == NULL)
 	{
 		errno = ENOMEM;
-		perror("Error");
+		perror("ERROR");
 		return (NULL);
 	}
 	for (num1 = 0; num1 < length ; num1++)
@@ -41,9 +41,9 @@ char *string_repetitions(char *string)
 
 int string_comparions(char *string1, char *string2, int number)
 {
-	int iterator;
+	int loops;
 
-	if (string1 == NULL && string2 == NULL)
+	if (string2 == NULL && string1 == NULL)
 		return (1);
 
 	if (string1 == NULL || string2 == NULL)
@@ -53,18 +53,18 @@ int string_comparions(char *string1, char *string2, int number)
 	{
 		if (string_size(string1) != string_size(string2))
 			return (0);
-		for (iterator = 0; string1[iterator]; iterator++)
+		for (loops = 0; string1[loops]; loops++)
 		{
-			if (string1[iterator] != string2[iterator])
+			if (string1[loops] != string2[loops])
 				return (0);
 		}
 		return (1);
 	}
 	else
 	{
-		for (iterator = 0; iterator < number ; iterator++)
+		for (loops = 0; loops < number ; loops++)
 		{
-			if (string1[iterator] != string2[iterator])
+			if (string1[loops] != string2[loops])
 			return (0);
 		}
 		return (1);
@@ -74,17 +74,17 @@ int string_comparions(char *string1, char *string2, int number)
 char *string_merging(char *string1, char *string2)
 {
 	char *result;
-	int length1 = 0, length2 = 0;
+	int num1 = 0, num2 = 0;
 
 	if (string1 == NULL)
 		string1 = "";
-	length1 = string_size(string1);
+	num1 = string_size(string1);
 
 	if (string2 == NULL)
 		string2 = "";
-	length2 = string_size(string2);
+	num2 = string_size(string2);
 
-	result = malloc(sizeof(char) * (length1 + length2 + 1));
+	result = malloc(sizeof(char) * (num1 + num2 + 1));
 	if (result == NULL)
 	{
 		errno = ENOMEM;
@@ -92,17 +92,17 @@ char *string_merging(char *string1, char *string2)
 		return (NULL);
 	}
 
-	for (length1 = 0; string1[length1] != '\0'; length1++)
-		result[length1] = string1[length1];
+	for (num1 = 0; string1[num1] != '\0'; num1++)
+		result[num1] = string1[num1];
 	free(string1);
 
-	for (length2 = 0; string2[length2] != '\0'; length2++)
+	for (num2 = 0; string2[num2] != '\0'; num2++)
 	{
-		result[length1] = string2[length2];
-		length1++;
+		result[num1] = string2[num2];
+		num1++;
 	}
 
-	result[length1] = '\0';
+	result[num1] = '\0';
 	return (result);
 }
 
