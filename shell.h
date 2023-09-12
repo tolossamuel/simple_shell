@@ -13,9 +13,16 @@
 #include <signal.h>
 #include <fcntl.h>
 
+#define PROMPT_MSG "$ "
 
-#include "main.h" 
-
+#define UNUSED __attribute__((unused))
+#define BUFFER_SIZE 1024
+#define HELP_SETENV_MSG "setenv command:\n"
+#define HELP_ENV_MSG "env command:\n"
+#define HELP_CD_MSG "cd command:\n"
+#define HELP_EXIT_MSG "exit command:\n"
+#define HELP_UNSETENV_MSG "unsetenv command:\n"
+#define HELP_MSG "help command:\n"
 
 typedef struct about
 {
@@ -79,4 +86,8 @@ int printf_fun(data_of_program *data, char *alias);
 char *get_fun(data_of_program *data, char *alias);
 int set_fun(char *alias_string, data_of_program *data);
 int check(char *full_path);
+
+
+
+
 #endif /* SHELL_H */

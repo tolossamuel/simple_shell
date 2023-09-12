@@ -1,5 +1,4 @@
 #include "shell.h"
-#include "main.h"
 
 int builtins_list(data_of_program *data)
 {
