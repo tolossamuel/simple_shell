@@ -20,7 +20,7 @@ char *get_fun(program_info *info, char *name)
 
 }
 
-int printf_fun(program_info *info, char *alias)
+int printf_fun(program_info *info, char *name)
 {
 	int num1;
 	int num2;
@@ -29,10 +29,10 @@ int printf_fun(program_info *info, char *alias)
 
 	if (info->alias_list)
 	{
-		alias_length = string_size(alias);
+		alias_length = string_size(name);
 		for (num1 = 0; info->alias_list[num1]; num1++)
 		{
-			if (!alias || (string_comparions(info->alias_list[num1], alias, alias_length)
+			if (!name || (string_comparions(info->alias_list[num1], name, alias_length)
 				&&	info->alias_list[num1][alias_length] == '='))
 			{
 				for (num2 = 0; info->alias_list[num1][num2]; num2++)
