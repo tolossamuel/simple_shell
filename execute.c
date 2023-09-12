@@ -1,13 +1,13 @@
 #include "shell.h"
 
-int executed(data_of_program *data)
+int executed(program_info *info)
 {
 	int num1 = 0, status;
 	pid_t pid;
-	num1 = built_list(data);
+	num1 = built_list(info);
 	if (num1 != -1)
 		return (num1);
-	num1 = search_file(data);
+	num1 = search_file(info);
 	if (num1)
 	{
 		return (num1);
@@ -17,14 +17,14 @@ int executed(data_of_program *data)
 		pid = fork(); 
 		if (pid == -1)
 		{ 
-			perror(data->cmd_name);
+			perror(info->cmd_name);
 			exit(EXIT_FAILURE);
 		}
 		if (pid == 0)
 		{
-			num1 = execve(data->tokens[0], data->tokens, data->env);
+			num1 = execve(info->tokens[0], info->tokens, info->env);
 			if (num1 == -1) 
-				perror(data->cmd_name), exit(EXIT_FAILURE);
+				perror(info->cmd_name), exit(EXIT_FAILURE);
 		}
 		else
 		{

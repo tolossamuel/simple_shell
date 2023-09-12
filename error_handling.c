@@ -1,29 +1,29 @@
 #include "shell.h"
 
-void free_data(data_of_program *data)
+void free_data(program_info *info)
 {
-	if (data->tokens)
-		free_array_pointes(data->tokens);
-	if (data->get_line)
-		free(data->get_line);
-	if (data->cmd_name)
-		free(data->cmd_name);
+	if (info->tokens)
+		free_array_pointes(info->tokens);
+	if (info->get_line)
+		free(info->get_line);
+	if (info->cmd_name)
+		free(info->cmd_name);
 
-	data->get_line = NULL;	
-	data->cmd_name = NULL;
-	data->tokens = NULL;
+	info->get_line = NULL;	
+	info->cmd_name = NULL;
+	info->tokens = NULL;
 }
 
-void free_all(data_of_program *data)
+void free_all(program_info *info)
 {
-	if (data->file_desc != 0)
+	if (info->file_desc != 0)
 	{
-		if (close(data->file_desc))
-			perror(data->Name_projects);
+		if (close(info->file_desc))
+			perror(info->Name_projects);
 	}
-	free_data(data);
-	free_array_pointes(data->env);
-	free_array_pointes(data->alias_list);
+	free_data(info);
+	free_array_pointes(info->env);
+	free_array_pointes(info->alias_list);
 }
 
 void free_array_pointes(char **array)

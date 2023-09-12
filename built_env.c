@@ -1,23 +1,23 @@
 #include "shell.h"
 
-int exit_env(data_of_program *data)
+int exit_env(program_info *info)
 {
 	int num1;
 
-	if (data->tokens[1] != NULL)
+	if (info->tokens[1] != NULL)
 	{
-		for (num1 = 0; data->tokens[1][num1]; num1++)
-			if ((data->tokens[1][num1] < '0' || data->tokens[1][num1] > '9')
-				&& data->tokens[1][num1] != '+')
+		for (num1 = 0; info->tokens[1][num1]; num1++)
+			if ((info->tokens[1][num1] < '0' || info->tokens[1][num1] > '9')
+				&& info->tokens[1][num1] != '+')
 			{
 				errno = 2;
 				return (2);
 			}
-		errno = _atoi(data->tokens[1]);
+		errno = _atoi(info->tokens[1]);
 	}
 	
-	if (data != NULL) {
-		free_all(data);
+	if (info != NULL) {
+		free_all(info);
 	}
 	exit(errno);
 }
@@ -25,7 +25,7 @@ int exit_env(data_of_program *data)
 
 
 
-int set_dir(data_of_program *data, char *new_dir)
+int set_dir(program_info *info, char *new_dir)
 {
 	char old_dir[128] = {0};
 	int err_code = 0;
@@ -40,25 +40,25 @@ int set_dir(data_of_program *data, char *new_dir)
 			errno = 2;
 			return (3);
 		}
-		set_key("PWD", new_dir, data);
+		set_key("PWD", new_dir, info);
 	}
-	set_key("OLDPW", old_dir, data);
+	set_key("OLDPW", old_dir, info);
 	return (0);
 }
 
 
-int builtin_alias(data_of_program *data)
+int builtin_alias(program_info *info)
 {
-	int i = 0;
-	if (data->tokens[1] == NULL)
-		return (printf_fun(data, NULL));
+	int num1 = 0;
+	if (info->tokens[1] == NULL)
+		return (printf_fun(info, NULL));
 
-	while (data->tokens[++i])
+	while (info->tokens[++num1])
 	{
-		if (size_characters(data->tokens[i], "="))
-			set_fun(data->tokens[i], data);
+		if (size_characters(info->tokens[num1], "="))
+			set_fun(info->tokens[num1], info);
 		else
-			printf_fun(data, data->tokens[i]);
+			printf_fun(info, info->tokens[num1]);
 	}
 
 	return (0);

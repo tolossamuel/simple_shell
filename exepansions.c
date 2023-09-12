@@ -1,58 +1,58 @@
 #include "shell.h"
 
-void var_expand(data_of_program *data)
+void var_expand(program_info *info)
 {
-	int i, j;
+	int num1, num2;
 	char line[BUFFER_SIZE] = {0}, expansion[BUFFER_SIZE] = {'\0'}, *temp;
 
-	if (data->get_line == NULL)
+	if (info->get_line == NULL)
 		return;
-	new_buffer(line, data->get_line);
-	for (i = 0; line[i]; i++)
-		if (line[i] == '#')
-			line[i--] = '\0';
-		else if (line[i] == '$' && line[i + 1] == '?')
+	new_buffer(line, info->get_line);
+	for (num1 = 0; line[num1]; num1++)
+		if (line[num1] == '#')
+			line[num1--] = '\0';
+		else if (line[num1] == '$' && line[num1 + 1] == '?')
 		{
-			line[i] = '\0';
+			line[num1] = '\0';
 			string_long(errno, expansion, 10);
 			new_buffer(line, expansion);
-			new_buffer(line, data->get_line + i + 2);
+			new_buffer(line, info->get_line + num1 + 2);
 		}
-		else if (line[i] == '$' && line[i + 1] == '$')
+		else if (line[num1] == '$' && line[num1 + 1] == '$')
 		{
-			line[i] = '\0';
+			line[num1] = '\0';
 			string_long(getpid(), expansion, 10);
 			new_buffer(line, expansion);
-			new_buffer(line, data->get_line + i + 2);
+			new_buffer(line, info->get_line + num1 + 2);
 		}
-		else if (line[i] == '$' && (line[i + 1] == ' ' || line[i + 1] == '\0'))
+		else if (line[num1] == '$' && (line[num1 + 1] == ' ' || line[num1 + 1] == '\0'))
 			continue;
-		else if (line[i] == '$')
+		else if (line[num1] == '$')
 		{
-			for (j = 1; line[i + j] && line[i + j] != ' '; j++)
-				expansion[j - 1] = line[i + j];
-			temp = get_key(expansion, data);
-			line[i] = '\0', expansion[0] = '\0';
-			new_buffer(expansion, line + i + j);
+			for (num2 = 1; line[num1 + num2] && line[num1 + num2] != ' '; num2++)
+				expansion[num2 - 1] = line[num1 + num2];
+			temp = get_key(expansion, info);
+			line[num1] = '\0', expansion[0] = '\0';
+			new_buffer(expansion, line + num1 + num2);
 			temp ? new_buffer(line, temp) : 1;
 			new_buffer(line, expansion);
 		}
-	if (!string_comparions(data->get_line, line, 0))
+	if (!string_comparions(info->get_line, line, 0))
 	{
-		free(data->get_line);
-		data->get_line = string_repetitions(line);
+		free(info->get_line);
+		info->get_line = string_repetitions(line);
 	}
 }
 
-void expand_alias(data_of_program *data)
+void expand_alias(program_info *info)
 {
 	int i, j, was_expanded = 0;
 	char line[BUFFER_SIZE] = {0}, expansion[BUFFER_SIZE] = {'\0'}, *temp;
 
-	if (data->get_line == NULL)
+	if (info->get_line == NULL)
 		return;
 
-	new_buffer(line, data->get_line);
+	new_buffer(line, info->get_line);
 
 	for (i = 0; line[i]; i++)
 	{
@@ -60,7 +60,7 @@ void expand_alias(data_of_program *data)
 			expansion[j] = line[i + j];
 		expansion[j] = '\0';
 
-		temp = get_fun(data, expansion);
+		temp = get_fun(info, expansion);
 		if (temp)
 		{
 			expansion[0] = '\0';
@@ -75,19 +75,19 @@ void expand_alias(data_of_program *data)
 	}
 	if (was_expanded)
 	{
-		free(data->get_line);
-		data->get_line = string_repetitions(line);
+		free(info->get_line);
+		info->get_line = string_repetitions(line);
 	}
 }
 
-int new_buffer(char *buffer, char *str_to_add)
+int new_buffer(char *buffer, char *concatenate_string)
 {
 	int length, i;
 
 	length = string_size(buffer);
-	for (i = 0; str_to_add[i]; i++)
+	for (i = 0; concatenate_string[i]; i++)
 	{
-		buffer[length + i] = str_to_add[i];
+		buffer[length + i] = concatenate_string[i];
 	}
 	buffer[length + i] = '\0';
 	return (length + i);

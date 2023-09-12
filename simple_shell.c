@@ -4,7 +4,7 @@
 
 int main(int argc, char *argv[], char *env[])
 {
-	data_of_program stru_data = {NULL}, *data = &stru_data;
+	program_info stru_data = {NULL}, *data = &stru_data;
 	char *prompt = "";
 	
 	start_with(data, argc, argv, env);
@@ -26,7 +26,7 @@ void handle_short_cut(int operations UNUSED)
 	_print(PROMPT_MSG);
 }
 
-void start_with(data_of_program *data, int argc, char *argv[], char **env)
+void start_with(program_info *data, int argc, char *argv[], char **env)
 {
 	int i = 0;
 
@@ -68,7 +68,7 @@ void start_with(data_of_program *data, int argc, char *argv[], char **env)
 	}
 }
 
-void size_of_(char *prompt, data_of_program *data)
+void size_of_(char *prompt, program_info *data)
 {
 	int error_code = 0, string_len = 0;
 

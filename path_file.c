@@ -3,54 +3,54 @@
 
 
 
-int search_file(data_of_program *data)
+int search_file(program_info *info)
 {
-	int i = 0, ret_code = 0;
+	int num1 = 0, ret_code = 0;
 	char **directories;
 
-	if (!data->cmd_name)
+	if (!info->cmd_name)
 		return (2);
-	if (data->cmd_name[0] == '/' || data->cmd_name[0] == '.')
-		return (check(data->cmd_name));
+	if (info->cmd_name[0] == '/' || info->cmd_name[0] == '.')
+		return (check(info->cmd_name));
 
-	free(data->tokens[0]);
-	data->tokens[0] = string_merging(string_repetitions("/"), data->cmd_name);
-	if (!data->tokens[0])
+	free(info->tokens[0]);
+	info->tokens[0] = string_merging(string_repetitions("/"), info->cmd_name);
+	if (!info->tokens[0])
 		return (2);
 
-	directories = path_of_file(data);/* search in the PATH */
+	directories = path_of_file(info);/* search in the PATH */
 
 	if (!directories || !directories[0])
 	{
 		errno = 127;
 		return (127);
 	}
-	for (i = 0; directories[i]; i++)
+	for (num1 = 0; directories[num1]; num1++)
 	{
-		directories[i] = string_merging(directories[i], data->tokens[0]);
-		ret_code = check(directories[i]);
+		directories[num1] = string_merging(directories[num1], info->tokens[0]);
+		ret_code = check(directories[num1]);
 		if (ret_code == 0 || ret_code == 126)
 		{
 			errno = 0;
-			free(data->tokens[0]);
-			data->tokens[0] = string_repetitions(directories[i]);
+			free(info->tokens[0]);
+			info->tokens[0] = string_repetitions(directories[num1]);
 			free_array_pointes(directories);
 			return (ret_code);
 		}
 	}
-	free(data->tokens[0]);
-	data->tokens[0] = NULL;
+	free(info->tokens[0]);
+	info->tokens[0] = NULL;
 	free_array_pointes(directories);
 	return (ret_code);
 }
 
-char **path_of_file(data_of_program *data)
+char **path_of_file(program_info *info)
 {
 	int i = 0;
 	int counter_directories = 2;
 	char **tokens = NULL;
 	char *PATH;
-	PATH = get_key("PATH", data);
+	PATH = get_key("PATH", info);
 	if ((PATH == NULL) || PATH[0] == '\0')
 	{
 		return (NULL);
@@ -76,13 +76,13 @@ char **path_of_file(data_of_program *data)
 
 }
 
-int check(char *full_path)
+int check(char *file_path)
 {
 	struct stat sb;
 
-	if (stat(full_path, &sb) != -1)
+	if (stat(file_path, &sb) != -1)
 	{
-		if (S_ISDIR(sb.st_mode) ||  access(full_path, X_OK))
+		if (S_ISDIR(sb.st_mode) ||  access(file_path, X_OK))
 		{
 			errno = 126;
 			return (126);

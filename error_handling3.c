@@ -11,7 +11,7 @@ int _printe(char *string)
 }
 
 
-int handle_error(int error_code, data_of_program *data)
+int handle_error(int error_code, program_info *data)
 {
 	char n_as_string[10] = {'\0'};
 

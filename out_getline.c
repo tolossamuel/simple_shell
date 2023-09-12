@@ -1,6 +1,6 @@
 #include "shell.h"
 
-int _getline(data_of_program *data)
+int _getline(program_info *info)
 {
 	char buff[BUFFER_SIZE] = {'\0'};
 	static char *array_commands[10] = {NULL};
@@ -15,7 +15,7 @@ int _getline(data_of_program *data)
 			free(array_commands[i]);
 			array_commands[i] = NULL;
 		}
-		bytes_read = read(data->file_desc, &buff, BUFFER_SIZE - 1);
+		bytes_read = read(info->file_desc, &buff, BUFFER_SIZE - 1);
 		if (bytes_read == 0)
 			return (-1);
 
@@ -25,19 +25,19 @@ int _getline(data_of_program *data)
 			i = logical_operations(array_commands, i, array_operators);
 		} while (array_commands[i++]);
 	}
-	data->get_line = array_commands[0];
+	info->get_line = array_commands[0];
 	for (i = 0; array_commands[i]; i++)
 	{
 		array_commands[i] = array_commands[i + 1];
 		array_operators[i] = array_operators[i + 1];
 	}
 
-	return (string_size(data->get_line));
+	return (string_size(info->get_line));
 }
 
 char *str_tok(char *line, char *delim)
 {
-	int j;
+	int num1;
 	static char *str;
 	char *copy_str;
 
@@ -45,12 +45,12 @@ char *str_tok(char *line, char *delim)
 		str = line;
 	for (; *str != '\0'; str++)
 	{
-		for (j = 0; delim[j] != '\0'; j++)
+		for (num1 = 0; delim[num1] != '\0'; num1++)
 		{
-			if (*str == delim[j])
+			if (*str == delim[num1])
 			break;
 		}
-		if (delim[j] == '\0')
+		if (delim[num1] == '\0')
 			break;
 	}
 	copy_str = str;
@@ -58,9 +58,9 @@ char *str_tok(char *line, char *delim)
 		return (NULL);
 	for (; *str != '\0'; str++)
 	{
-		for (j = 0; delim[j] != '\0'; j++)
+		for (num1 = 0; delim[num1] != '\0'; num1++)
 		{
-			if (*str == delim[j])
+			if (*str == delim[num1])
 			{
 				*str = '\0';
 				str++;

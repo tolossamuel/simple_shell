@@ -4,22 +4,21 @@ void string_long(long number, char *string, int base)
 {
 	int index = 0;
 	int negative_num = 0;
-	long var1 = number;
 	char letters[] = {"0123456789abcdef"};
 
-	if (var1 == 0)
+	if (number == 0)
 		string[index++] = '0';
 
 	if (string[0] == '-')
 		negative_num = 1;
 
-	while (var1)
+	while (number)
 	{
-		if (var1 < 0)
-			string[index++] = letters[-(var1 % base)];
+		if (number < 0)
+			string[index++] = letters[-(number % base)];
 		else
-			string[index++] = letters[var1 % base];
-		var1 /= base;
+			string[index++] = letters[number % base];
+		number /= base;
 	}
 	if (negative_num)
 		string[index++] = '-';

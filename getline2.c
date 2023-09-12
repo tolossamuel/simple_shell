@@ -3,37 +3,37 @@
 int logical_operations(char *cmd_array[], int num, char ops_ary[])
 {
 	
-	int var;
+	int num1;
 	char *temporary = NULL;
 
-	for (var = 0; cmd_array[num] != NULL  && cmd_array[num][var]; var++)
+	for (num1 = 0; cmd_array[num] != NULL  && cmd_array[num][num1]; num1++)
 	{
-		if (cmd_array[num][var] == '&' && cmd_array[num][var + 1] == '&')
+		if (cmd_array[num][num1] == '&' && cmd_array[num][num1 + 1] == '&')
 		{
 			temporary = cmd_array[num];
-			cmd_array[num][var] = '\0';
+			cmd_array[num][num1] = '\0';
 			cmd_array[num] = string_repetitions(cmd_array[num]);
-			cmd_array[num + 1] = string_repetitions(temporary + var + 2);
+			cmd_array[num + 1] = string_repetitions(temporary + num1 + 2);
 			num++;
 			ops_ary[num] = '&';
 			free(temporary);
-			var = 0;
+			num1 = 0;
 		}
-		if (cmd_array[num][var] == '|' && cmd_array[num][var + 1] == '|')
+		if (cmd_array[num][num1] == '|' && cmd_array[num][num1 + 1] == '|')
 		{
 			temporary = cmd_array[num];
-			cmd_array[num][var] = '\0';
+			cmd_array[num][num1] = '\0';
 			cmd_array[num] = string_repetitions(cmd_array[num]);
-			cmd_array[num + 1] = string_repetitions(temporary + var + 2);
+			cmd_array[num + 1] = string_repetitions(temporary + num1 + 2);
 			num++;
 			ops_ary[num] = '|';
 			free(temporary);
-			var = 0;
+			num1 = 0;
 		}
 	}
 	return (num);
 }
-void tokenize_data(data_of_program *data)
+void tokenize_data(program_info *data)
 {
 	char *delimiter = " \t";
 	int i, j, counter = 2, length;
