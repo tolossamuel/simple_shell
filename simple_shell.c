@@ -6,11 +6,9 @@ int main(int argc, char *argv[], char *env[])
 {
 	program_info stru_data = {NULL}, *info = &stru_data;
 	char *prompt = "";
-	
+
 	start_with(info, argc, argv, env);
-
 	signal(SIGINT, handle_short_cut);
-
 	if (isatty(STDIN_FILENO) && isatty(STDOUT_FILENO) && argc == 1)
 	{
 		errno = 2;
@@ -28,13 +26,12 @@ void handle_short_cut(int operations UNUSED)
 
 void start_with(program_info *info, int argc, char *argv[], char **env)
 {
-	int i = 0;
+	int num1 = 0;
 
 	info->Name_projects = argv[0];
 	info->get_line = NULL;
 	info->cmd_name = NULL;
 	info->execute_counter = 0;
-	/* define the file descriptor to be readed*/
 	if (argc == 1)
 		info->file_desc = STDIN_FILENO;
 	else
@@ -53,18 +50,18 @@ void start_with(program_info *info, int argc, char *argv[], char **env)
 	info->env = malloc(sizeof(char *) * 50);
 	if (env)
 	{
-		for (; env[i]; i++)
+		for (; env[num1]; num1++)
 		{
-			info->env[i] = string_repetitions(env[i]);
+			info->env[num1] = string_repetitions(env[num1]);
 		}
 	}
-	info->env[i] = NULL;
+	info->env[num1] = NULL;
 	env = info->env;
 
 	info->alias_list = malloc(sizeof(char *) * 20);
-	for (i = 0; i < 20; i++)
+	for (num1 = 0; num1 < 20; num1++)
 	{
-		info->alias_list[i] = NULL;
+		info->alias_list[num1] = NULL;
 	}
 }
 
