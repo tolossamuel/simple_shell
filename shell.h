@@ -42,21 +42,21 @@ typedef struct env_structure
 	char *built_in;
 	int (*function)(program_info *info);
 } env_structure;
-void start_with(program_info *info, int arc, char *argv[], char **env);
+void start_with(program_info *info, int argc, char *argv[], char **env);
 void size_of_(char *prompt, program_info *info);
-void handle_short_cut(int opr UNUSED);
+void handle_short_cut(int operations UNUSED);
 int _getline(program_info *info);
 int logical_operations(char *cmd_array[], int num, char ops_ary[]);
 void var_expand(program_info *info);
 void expand_alias(program_info *info);
-int new_buffer(char *buffer, char *str_to_add);
+int new_buffer(char *buffer, char *concatenate_string);
 void tokenize_data(program_info *info);
 char *str_tok(char *line, char *delim);
 int executed(program_info *info);
 int built_list(program_info *info);
 char **path_of_file(program_info *info);
 int search_file(program_info *info);
-void free_array_pointes(char **directories);
+void free_array_pointes(char **array);
 void free_data(program_info *info);
 void free_all(program_info *info);
 int exit_env(program_info *info);
@@ -80,12 +80,12 @@ int string_comparions(char *string1, char *string2, int number);
 char *string_merging(char *string1, char *string2);
 void reverse(char *string);
 void string_long(long number, char *string, int base);
-int _atoi(char *s);
+int _atoi(char *strings);
 int size_characters(char *string, char *character);
 int printf_fun(program_info *info, char *name);
 char *get_fun(program_info *info, char *name);
 int set_fun(char *alias_string, program_info *info);
-int check(char *full_path);
+int check(char *file_path);
 
 
 

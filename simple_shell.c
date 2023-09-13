@@ -4,10 +4,10 @@
 
 int main(int argc, char *argv[], char *env[])
 {
-	program_info stru_data = {NULL}, *data = &stru_data;
+	program_info stru_data = {NULL}, *info = &stru_data;
 	char *prompt = "";
 	
-	start_with(data, argc, argv, env);
+	start_with(info, argc, argv, env);
 
 	signal(SIGINT, handle_short_cut);
 
@@ -17,7 +17,7 @@ int main(int argc, char *argv[], char *env[])
 		prompt = PROMPT_MSG;
 	}
 	errno = 0;
-	size_of_(prompt, data);
+	size_of_(prompt, info);
 	return (0);
 }
 void handle_short_cut(int operations UNUSED)
@@ -26,74 +26,74 @@ void handle_short_cut(int operations UNUSED)
 	_print(PROMPT_MSG);
 }
 
-void start_with(program_info *data, int argc, char *argv[], char **env)
+void start_with(program_info *info, int argc, char *argv[], char **env)
 {
 	int i = 0;
 
-	data->Name_projects = argv[0];
-	data->get_line = NULL;
-	data->cmd_name = NULL;
-	data->execute_counter = 0;
+	info->Name_projects = argv[0];
+	info->get_line = NULL;
+	info->cmd_name = NULL;
+	info->execute_counter = 0;
 	/* define the file descriptor to be readed*/
 	if (argc == 1)
-		data->file_desc = STDIN_FILENO;
+		info->file_desc = STDIN_FILENO;
 	else
 	{
-		data->file_desc = open(argv[1], O_RDONLY);
-		if (data->file_desc == -1)
+		info->file_desc = open(argv[1], O_RDONLY);
+		if (info->file_desc == -1)
 		{
-			_printe(data->Name_projects);
+			_printe(info->Name_projects);
 			_printe(": 0: does not open ");
 			_printe(argv[1]);
 			_printe("\n");
 			exit(127);
 		}
 	}
-	data->tokens = NULL;
-	data->env = malloc(sizeof(char *) * 50);
+	info->tokens = NULL;
+	info->env = malloc(sizeof(char *) * 50);
 	if (env)
 	{
 		for (; env[i]; i++)
 		{
-			data->env[i] = string_repetitions(env[i]);
+			info->env[i] = string_repetitions(env[i]);
 		}
 	}
-	data->env[i] = NULL;
-	env = data->env;
+	info->env[i] = NULL;
+	env = info->env;
 
-	data->alias_list = malloc(sizeof(char *) * 20);
+	info->alias_list = malloc(sizeof(char *) * 20);
 	for (i = 0; i < 20; i++)
 	{
-		data->alias_list[i] = NULL;
+		info->alias_list[i] = NULL;
 	}
 }
 
-void size_of_(char *prompt, program_info *data)
+void size_of_(char *prompt, program_info *info)
 {
 	int error_code = 0, string_len = 0;
 
-	while (++(data->execute_counter))
+	while (++(info->execute_counter))
 	{
 		_print(prompt);
-		error_code = string_len = _getline(data);
+		error_code = string_len = _getline(info);
 
 		if (error_code == EOF)
 		{
-			free_all(data);
+			free_all(info);
 			exit(errno); 
 		}
 		if (string_len >= 1)
 		{
-			expand_alias(data);
-			var_expand(data);
-			tokenize_data(data);
-			if (data->tokens[0])
+			expand_alias(info);
+			var_expand(info);
+			tokenize_data(info);
+			if (info->tokens[0])
 			{
-				error_code = executed(data);
+				error_code = executed(info);
 				if (error_code != 0)
-					handle_error(error_code, data);
+					handle_error(error_code, info);
 			}
-			free_data(data);
+			free_data(info);
 		}
 	}
 }
