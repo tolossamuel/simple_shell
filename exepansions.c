@@ -1,6 +1,6 @@
 #include "shell.h"
 
-void var_expand(program_info *info)
+void var_expand(about *info)
 {
 	int num1, num2;
 	char line[BUFFER_SIZE] = {0}, expansion[BUFFER_SIZE] = {'\0'}, *temp;
@@ -44,7 +44,7 @@ void var_expand(program_info *info)
 	}
 }
 
-void expand_alias(program_info *info)
+void expand_alias(about *info)
 {
 	int i, j, was_expanded = 0;
 	char line[BUFFER_SIZE] = {0}, expansion[BUFFER_SIZE] = {'\0'}, *temp;

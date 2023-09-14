@@ -7,7 +7,7 @@
  * @name: a string representing the alias name
  * Return: the value of an alias if it exists otherwise NULL
 */
-char *get_fun(program_info *info, char *name)
+char *get_fun(about *info, char *name)
 {
 	int num1, alias_length;
 
@@ -33,7 +33,7 @@ char *get_fun(program_info *info, char *name)
  * @name: a string representing the alias name
  * Return: an integer value, which is always 0 in this implementation.
  */
-int printf_fun(program_info *info, char *name)
+int printf_fun(about *info, char *name)
 {
 	int num1;
 	int num2;
@@ -73,7 +73,7 @@ int printf_fun(program_info *info, char *name)
  * Return: It returns an integer result, which is 0 on success
  * or 1 if the alias_string or alias_list is not available
 */
-int set_fun(char *alias_string, program_info *info)
+int set_fun(char *alias_string, about *info)
 {
 	int num1;
 	int num2;

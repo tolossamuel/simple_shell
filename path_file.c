@@ -3,7 +3,7 @@
 
 
 
-int search_file(program_info *info)
+int search_file(about *info)
 {
 	int num1 = 0, ret_code = 0;
 	char **directories;
@@ -44,7 +44,7 @@ int search_file(program_info *info)
 	return (ret_code);
 }
 
-char **path_of_file(program_info *info)
+char **path_of_file(about *info)
 {
 	int i = 0;
 	int counter_directories = 2;

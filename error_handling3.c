@@ -10,7 +10,7 @@ int _print(char *string)
 	return (write(STDOUT_FILENO, string, string_size(string)));
 }
 
-int handle_error(int error_code, program_info *info)
+int handle_error(int error_code, about *info)
 {
 	char arr_string[10] = {'\0'};
 

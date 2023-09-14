@@ -1,6 +1,6 @@
 #include "shell.h"
 
-void free_data(program_info *info)
+void free_data(about *info)
 {
 	if (info->tokens)
 		free_array_pointes(info->tokens);
@@ -14,7 +14,7 @@ void free_data(program_info *info)
 	info->tokens = NULL;
 }
 
-void free_all(program_info *info)
+void free_all(about *info)
 {
 	if (info->file_desc != 0)
 	{

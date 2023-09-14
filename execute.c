@@ -1,6 +1,6 @@
 #include "shell.h"
 
-int executed(program_info *info)
+int executed(about *info)
 {
 	int num1 = 0, status;
 	pid_t pid;

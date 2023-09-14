@@ -7,7 +7,7 @@
  * program-related information
  * Return: an integer value
  */
-int exit_env(program_info *info)
+int exit_env(about *info)
 {
 	int num1;
 
@@ -35,7 +35,7 @@ int exit_env(program_info *info)
  * @new_dir: a string representing a new directory path
  * Return: an integer value
  */
-int set_dir(program_info *info, char *new_dir)
+int set_dir(about *info, char *new_dir)
 {
 	char old_dir[128] = {0};
 	int err_code = 0;
@@ -61,7 +61,7 @@ int set_dir(program_info *info, char *new_dir)
  * @info: a pointer to a structure likely holding program-related information
  * Return: zero (0)
 */
-int builtin_alias(program_info *info)
+int builtin_alias(about *info)
 {
 	int num1 = 0;
 

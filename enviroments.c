@@ -1,6 +1,6 @@
 #include "shell.h"
 
-int env_builders(program_info *info)
+int env_builders(about *info)
 {
 	int num1;
 	char *var_copy = NULL;
@@ -41,7 +41,7 @@ int env_builders(program_info *info)
 }
 
 
-int unset_key(program_info *info)
+int unset_key(about *info)
 {
 	if (info->tokens[1] == NULL)
 		return (0);
@@ -57,7 +57,7 @@ int unset_key(program_info *info)
 }
 
 
-int builder_set_key(program_info *info)
+int builder_set_key(about *info)
 {
 	if (info->tokens[1] == NULL || info->tokens[2] == NULL)
 		return (0);

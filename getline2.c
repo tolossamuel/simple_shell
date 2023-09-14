@@ -33,7 +33,7 @@ int logical_operations(char *cmd_array[], int num, char ops_ary[])
 	}
 	return (num);
 }
-void tokenize_data(program_info *info)
+void tokenize_data(about *info)
 {
 	char *limiter = " \t";
 	int num1, num2, counter = 2, length;

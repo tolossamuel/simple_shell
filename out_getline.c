@@ -1,6 +1,6 @@
 #include "shell.h"
 
-int _getline(program_info *info)
+int _getline(about *info)
 {
 	char buff[BUFFER_SIZE] = {'\0'};
 	static char *array_commands[10] = {NULL};
