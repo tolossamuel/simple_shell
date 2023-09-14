@@ -1,13 +1,19 @@
 #include "shell.h"
 
+/**
+ * get_fun - Retrieve the value of a specified alias
+ * @info: a pointer to a structure likely holding
+ * program-related information
+ * @name: a string representing the alias name
+ * Return: the value of an alias if it exists otherwise NULL
+*/
 char *get_fun(program_info *info, char *name)
 {
 	int num1, alias_length;
+
 	if (name == NULL || info->alias_list == NULL)
 		return (NULL);
-
 	alias_length = string_size(name);
-
 	for (num1 = 0; info->alias_list[num1]; num1++)
 	{
 		if (string_comparions(name, info->alias_list[num1], alias_length) &&
@@ -17,9 +23,16 @@ char *get_fun(program_info *info, char *name)
 		}
 	}
 	return (NULL);
-
 }
 
+/**
+ * printf_fun - Print alias definitions based on a provided alias name
+ * or print all aliases if name is NULL
+ * @info: a pointer to a structure likely holding
+ * program-related information
+ * @name: a string representing the alias name
+ * Return: an integer value, which is always 0 in this implementation.
+ */
 int printf_fun(program_info *info, char *name)
 {
 	int num1;
@@ -49,10 +62,17 @@ int printf_fun(program_info *info, char *name)
 			}
 		}
 	}
-
 	return (0);
 }
 
+/**
+ * set_fun - Set an alias based on the provided alias string
+ * @alias_string: a string representing an alias definition
+ * @info: a pointer to a structure likely holding
+ * program-related information
+ * Return: It returns an integer result, which is 0 on success
+ * or 1 if the alias_string or alias_list is not available
+*/
 int set_fun(char *alias_string, program_info *info)
 {
 	int num1;
@@ -83,7 +103,7 @@ int set_fun(char *alias_string, program_info *info)
 		new_buffer(buffer, temp);
 		info->alias_list[num2] = string_repetitions(buffer);
 	}
-	else 
+	else
 		info->alias_list[num2] = string_repetitions(alias_string);
 	return (0);
 }

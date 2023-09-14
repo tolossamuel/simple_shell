@@ -1,8 +1,13 @@
 #include "shell.h"
 
+/**
+ * built_list - Execute the specified built-in command from a predefined list
+ * @info: a pointer to a structure likely holding program-related information
+ * Return: he result of executing the specified command or
+ * -1 if the command is not found
+ */
 int built_list(program_info *info)
 {
-	
 	env_structure menu_list[] = {
 		{"exit", exit_env},
 		{"unsetenv", unset_key},
@@ -19,13 +24,19 @@ int built_list(program_info *info)
 	{
 		if (string_comparions(menu_list[nums].built_in, info->cmd_name, 0))
 		{
-
 			return (menu_list[nums].function(info));
 		}
 	}
 	return (-1);
 }
 
+/**
+ * command_built - Change the current directory based on the provided
+ * argument or switch to the previous directory
+ * @info: pointer to a structure likely holding program-related information
+ * Return: an integer result indicating the success or failure of changing
+ * the current directory
+ */
 int command_built(program_info *info)
 {
 	char *dir_home = get_key("HOME", info), *dir_old = NULL;
@@ -41,7 +52,6 @@ int command_built(program_info *info)
 				error_code = set_dir(info, dir_old);
 			_print(get_key("PWD", info));
 			_print("\n");
-
 			return (error_code);
 		}
 		else
@@ -58,7 +68,13 @@ int command_built(program_info *info)
 	}
 	return (0);
 }
-
+/**
+ * help_built - Display help messages for built-in commands or provide
+ * an error message if the command is not found
+ * @info: pointer to a structure likely holding program-related information
+ * Return: It returns a success or error code based on whether it successfully
+ * displays help messages or provides an error message
+*/
 int help_built(program_info *info)
 {
 	int num1;
@@ -66,8 +82,6 @@ int help_built(program_info *info)
 	char *messages[6] = {NULL};
 
 	messages[0] = HELP_MSG;
-
-	/* validate args */
 	if (info->tokens[1] == NULL)
 	{
 		_print(messages[0] + 6);
@@ -84,7 +98,6 @@ int help_built(program_info *info)
 	messages[3] = HELP_SETENV_MSG;
 	messages[4] = HELP_UNSETENV_MSG;
 	messages[5] = HELP_CD_MSG;
-
 	for (num1 = 0; messages[num1]; num1++)
 	{
 		length = string_size(info->tokens[1]);

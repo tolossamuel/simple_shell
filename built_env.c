@@ -1,5 +1,12 @@
 #include "shell.h"
 
+/**
+ * exit_env - Exit the program with the specified status
+ * freeing allocated memory
+ * @info: a pointer to a structure that likely holds
+ * program-related information
+ * Return: an integer value
+ */
 int exit_env(program_info *info)
 {
 	int num1;
@@ -15,16 +22,19 @@ int exit_env(program_info *info)
 			}
 		errno = _atoi(info->tokens[1]);
 	}
-	
-	if (info != NULL) {
+	if (info != NULL)
+	{
 		free_all(info);
 	}
 	exit(errno);
 }
 
-
-
-
+/**
+ * set_dir - Change the current directory and update environment variables
+ * @info: a pointer to a structure likely holding program-related information
+ * @new_dir: a string representing a new directory path
+ * Return: an integer value
+ */
 int set_dir(program_info *info, char *new_dir)
 {
 	char old_dir[128] = {0};
@@ -46,10 +56,15 @@ int set_dir(program_info *info, char *new_dir)
 	return (0);
 }
 
-
+/**
+ * builtin_alias - Execute the alias command, which sets or displays aliases
+ * @info: a pointer to a structure likely holding program-related information
+ * Return: zero (0)
+*/
 int builtin_alias(program_info *info)
 {
 	int num1 = 0;
+
 	if (info->tokens[1] == NULL)
 		return (printf_fun(info, NULL));
 
@@ -60,6 +75,5 @@ int builtin_alias(program_info *info)
 		else
 			printf_fun(info, info->tokens[num1]);
 	}
-
 	return (0);
 }
