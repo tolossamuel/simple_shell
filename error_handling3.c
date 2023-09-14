@@ -24,9 +24,9 @@ int handle_error(int error_code, program_info *info)
 		_printe(": ");
 		_printe(info->tokens[0]);
 		if (error_code == 2)
-			_printe(": unexpected number: ");
+			_printe(": ERROR (unexpected number): ");
 		else
-			_printe(": can not redirect to ");
+			_printe(": ERROR (can not redirect): ");
 		_printe(info->tokens[1]);
 		_printe("\n");
 	}
@@ -37,7 +37,7 @@ int handle_error(int error_code, program_info *info)
 		_printe(arr_string);
 		_printe(": ");
 		_printe(info->cmd_name);
-		_printe(": not found\n");
+		_printe(": ERROR (not found)\n");
 	}
 	else if (error_code == 126)
 	{
@@ -46,7 +46,7 @@ int handle_error(int error_code, program_info *info)
 		_printe(arr_string);
 		_printe(": ");
 		_printe(info->cmd_name);
-		_printe(": Permission denied\n");
+		_printe(": ERROR (no permission)\n");
 	}
 	return (0);
 }

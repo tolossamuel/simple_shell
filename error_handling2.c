@@ -4,7 +4,7 @@ void string_long(long number, char *string, int base)
 {
 	int index = 0;
 	int negative_num = 0;
-	char letters[] = {"0123456789abcdef"};
+	char letters[] = {"abcd0123456789"};
 
 	if (number == 0)
 		string[index++] = '0';
