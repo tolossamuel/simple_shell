@@ -1,9 +1,16 @@
 #include "shell.h"
 
+/**
+ * executed - executes commands provided in the "info" struct
+ * @info: a pointer to a struct of type "about" which contains
+ * information related to the program's execution
+ * Return: an exit status or error code
+*/
 int executed(about *info)
 {
 	int num1 = 0, status;
 	pid_t pid;
+
 	num1 = built_list(info);
 	if (num1 != -1)
 		return (num1);
@@ -14,19 +21,18 @@ int executed(about *info)
 	}
 	else
 	{
-		pid = fork(); 
+		pid = fork();
 		if (pid == 0)
 		{
 			num1 = execve(info->tokens[0], info->tokens, info->env);
-			if (num1 == -1) 
+			if (num1 == -1)
 				perror(info->cmd_name), exit(EXIT_FAILURE);
 		}
 		if (pid == -1)
-		{ 
+		{
 			perror(info->cmd_name);
 			exit(EXIT_FAILURE);
 		}
-		
 		else
 		{
 			wait(&status);
