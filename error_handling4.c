@@ -1,5 +1,12 @@
 #include "shell.h"
 
+/**
+ * string_size - Calculates the length of the input string
+ * @string: a pointer to a character array (a string) whose
+ * length needs to be determined
+ * Return: the length of the input string excluding the null
+ * terminator or 0 if the string is NULL
+*/
 int string_size(char *string)
 {
 	int counter = 0;
@@ -13,49 +20,30 @@ int string_size(char *string)
 	return (counter - 1);
 }
 
-char *string_repetitions(char *string)
-{
-	char *result;
-	int length, num1;
-
-	if (string == NULL)
-		return (NULL);
-
-	length = string_size(string) + 1;
-
-	result = malloc(sizeof(char) * length);
-
-	if (result == NULL)
-	{
-		errno = ENOMEM;
-		perror("ERROR");
-		return (NULL);
-	}
-	for (num1 = 0; num1 < length ; num1++)
-	{
-		result[num1] = string[num1];
-	}
-
-	return (result);
-}
-
-int string_comparions(char *string1, char *string2, int number)
+/**
+ * string_comparions -
+ * @string_one:
+ * @string_two:
+ * @number:
+ * 
+*/
+int string_comparions(char *string_one, char *string_two, int number)
 {
 	int loops;
 
-	if (string2 == NULL && string1 == NULL)
+	if (string_two == NULL && string_one == NULL)
 		return (1);
 
-	if (string1 == NULL || string2 == NULL)
+	if (string_one == NULL || string_two == NULL)
 		return (0);
 
 	if (number == 0)
 	{
-		if (string_size(string1) != string_size(string2))
+		if (string_size(string_one) != string_size(string_two))
 			return (0);
-		for (loops = 0; string1[loops]; loops++)
+		for (loops = 0; string_one[loops]; loops++)
 		{
-			if (string1[loops] != string2[loops])
+			if (string_one[loops] != string_two[loops])
 				return (0);
 		}
 		return (1);
@@ -64,25 +52,31 @@ int string_comparions(char *string1, char *string2, int number)
 	{
 		for (loops = 0; loops < number ; loops++)
 		{
-			if (string1[loops] != string2[loops])
+			if (string_one[loops] != string_two[loops])
 			return (0);
 		}
 		return (1);
 	}
 }
 
-char *string_merging(char *string1, char *string2)
+/**
+ * string_merging -
+ * @string_one:
+ * @string_two:
+ * Return:
+*/
+char *string_merging(char *string_one, char *string_two)
 {
 	char *result;
 	int num1 = 0, num2 = 0;
 
-	if (string1 == NULL)
-		string1 = "";
-	num1 = string_size(string1);
+	if (string_one == NULL)
+		string_one = "";
+	num1 = string_size(string_one);
 
-	if (string2 == NULL)
-		string2 = "";
-	num2 = string_size(string2);
+	if (string_two == NULL)
+		string_two = "";
+	num2 = string_size(string_two);
 
 	result = malloc(sizeof(char) * (num1 + num2 + 1));
 	if (result == NULL)
@@ -92,13 +86,13 @@ char *string_merging(char *string1, char *string2)
 		return (NULL);
 	}
 
-	for (num1 = 0; string1[num1] != '\0'; num1++)
-		result[num1] = string1[num1];
-	free(string1);
+	for (num1 = 0; string_one[num1] != '\0'; num1++)
+		result[num1] = string_one[num1];
+	free(string_one);
 
-	for (num2 = 0; string2[num2] != '\0'; num2++)
+	for (num2 = 0; string_two[num2] != '\0'; num2++)
 	{
-		result[num1] = string2[num2];
+		result[num1] = string_two[num2];
 		num1++;
 	}
 
@@ -106,7 +100,11 @@ char *string_merging(char *string1, char *string2)
 	return (result);
 }
 
-
+/**
+ * reverse - 
+ * @string:
+ * Return:
+*/
 void reverse(char *string)
 {
 
