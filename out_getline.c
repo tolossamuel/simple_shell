@@ -1,5 +1,13 @@
 #include "shell.h"
 
+/**
+ * _getline - reads input data and processes it to prepare
+ * commands for execution in a shell program
+ * @info: a pointer to a "about" structure, which contains
+ * information about the program's state and configuration
+ * Return: the number of characters in the line read or
+ * -1 if there's nothing more to read.
+ */
 int _getline(about *info)
 {
 	char buff[BUFFER_SIZE] = {'\0'};
@@ -35,6 +43,15 @@ int _getline(about *info)
 	return (string_size(info->get_line));
 }
 
+/**
+ * str_tok - function is a custom implementation of the strtok
+ * function in C which tokenize a string based on a delimiter
+ * @line: a pointer to the input string that is being tokenized
+ * @delim: a pointer to a string containing delimiter characters
+ * used to split the input string into tokens
+ * Return: The next token in the input string or NULL
+ * if there are no more tokens to be found.
+ */
 char *str_tok(char *line, char *delim)
 {
 	int num1;
@@ -70,4 +87,3 @@ char *str_tok(char *line, char *delim)
 	}
 	return (copy_str);
 }
-
