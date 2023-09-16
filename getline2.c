@@ -1,8 +1,15 @@
 #include "shell.h"
 
+/**
+ * logical_operations - splits a command array into subcommands based
+ * on logical operators
+ * @cmd_array: An array of strings (commands)
+ * @num: An integer representing the current position in the cmd_array
+ * @ops_ary: An array of characters used to store the logical operators
+ * Return: the number of subcommands created from the input command array
+ */
 int logical_operations(char *cmd_array[], int num, char ops_ary[])
 {
-	
 	int num1;
 	char *temporary = NULL;
 
@@ -33,6 +40,14 @@ int logical_operations(char *cmd_array[], int num, char ops_ary[])
 	}
 	return (num);
 }
+
+/**
+ * tokenize_data - The function tokenize an input string, stores
+ * tokens in info->tokens, and sets the command name in info->cmd_name
+ * @info: parameter in these functions stores information and
+ * performs operations related to the program's data and execution
+ * Return: The function doesn't return a value (void)
+ */
 void tokenize_data(about *info)
 {
 	char *limiter = " \t";
@@ -44,7 +59,6 @@ void tokenize_data(about *info)
 		if (info->get_line[length - 1] == '\n')
 			info->get_line[length - 1] = '\0';
 	}
-
 	for (num1 = 0; info->get_line[num1]; num1++)
 	{
 		for (num2 = 0; limiter[num2]; num2++)
@@ -53,7 +67,6 @@ void tokenize_data(about *info)
 				counter++;
 		}
 	}
-
 	info->tokens = malloc(counter * sizeof(char *));
 	if (info->tokens == NULL)
 	{
