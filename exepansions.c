@@ -1,5 +1,11 @@
 #include "shell.h"
 
+/**
+ * var_expand - processes and expands variables in a given text line
+ * stored in the "info" structure
+ * @info: a struct of type "about" in the function "var_expand
+ * Return: does not have a return value (void)
+*/
 void var_expand(about *info)
 {
 	int num1, num2;
@@ -17,15 +23,14 @@ void var_expand(about *info)
 			string_long(errno, expansion, 10);
 			new_buffer(line, expansion);
 			new_buffer(line, info->get_line + num1 + 2);
-		}
-		else if (line[num1] == '$' && line[num1 + 1] == '$')
+		} else if (line[num1] == '$' && line[num1 + 1] == '$')
 		{
 			line[num1] = '\0';
 			string_long(getpid(), expansion, 10);
 			new_buffer(line, expansion);
 			new_buffer(line, info->get_line + num1 + 2);
-		}
-		else if (line[num1] == '$' && (line[num1 + 1] == ' ' || line[num1 + 1] == '\0'))
+		} else if (line[num1] == '$' && (line[num1 + 1] == ' '
+		|| line[num1 + 1] == '\0'))
 			continue;
 		else if (line[num1] == '$')
 		{
@@ -44,6 +49,12 @@ void var_expand(about *info)
 	}
 }
 
+/**
+ * expand_alias - searches for and expands aliases in the provided
+ * input line stored in "info->get_line"
+ * @info: a struct of type "about" in the function "var_expand
+ * Return: does not have a return value (void)
+*/
 void expand_alias(about *info)
 {
 	int i, j, was_expanded = 0;
@@ -51,9 +62,7 @@ void expand_alias(about *info)
 
 	if (info->get_line == NULL)
 		return;
-
 	new_buffer(line, info->get_line);
-
 	for (i = 0; line[i]; i++)
 	{
 		for (j = 0; line[i + j] && line[i + j] != ' '; j++)
@@ -80,6 +89,14 @@ void expand_alias(about *info)
 	}
 }
 
+/**
+ * new_buffer - The "new_buffer" function appends the "concatenate_string"
+ * to the end of the "buffer"
+ * @buffer: a character array to which "concatenate_string" is appended
+ * @concatenate_string: a string that is concatenated to "buffer"
+ * Return: the total length of the resulting string after appending
+ * "concatenate_string" to "buffer"
+*/
 int new_buffer(char *buffer, char *concatenate_string)
 {
 	int num1, num2;
