@@ -9,7 +9,7 @@
  * Return: a pointer to the value of the specified environment
  * variable or NULL if the variable is not found
  */
-char *get_key(char *key, about *info)
+char *get_key(char *key, about_info *info)
 {
 	int num1;
 	int key_length = 0;
@@ -36,7 +36,7 @@ char *get_key(char *key, about *info)
  * program-related information
  * Return: 0 on success and 1 on failure
  */
-int set_key(char *key, char *value, about *info)
+int set_key(char *key, char *value, about_info *info)
 {
 	int i, key_length = 0, is_new_key = 1;
 
@@ -68,7 +68,7 @@ int set_key(char *key, char *value, about *info)
  * program-related information
  * Return: nothing
  */
-void env_print(about *info)
+void env_print(about_info *info)
 {
 	int num1;
 
@@ -86,7 +86,7 @@ void env_print(about *info)
  * @key: a string representing the environment variable key
  * Return: zero (0)
  */
-int remove_key(char *key, about *info)
+int remove_key(char *key, about_info *info)
 {
 	int num1;
 	int key_length = 0;

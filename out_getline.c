@@ -8,7 +8,7 @@
  * Return: the number of characters in the line read or
  * -1 if there's nothing more to read.
  */
-int _getline(about *info)
+int _getline(about_info *info)
 {
 	char buff[BUFFER_SIZE] = {'\0'};
 	static char *array_commands[10] = {NULL};

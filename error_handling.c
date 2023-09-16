@@ -7,7 +7,7 @@
  * program-related information and environment variables.
  * Return: It doesn't return any value (void function)
 */
-void free_data(about *info)
+void free_data(about_info *info)
 {
 	if (info->tokens)
 		free_array_pointes(info->tokens);
@@ -27,12 +27,12 @@ void free_data(about *info)
  * program-related information and environment variables.
  * Return: It doesn't return any value (void function)
 */
-void free_all(about *info)
+void free_all(about_info *info)
 {
 	if (info->file_desc != 0)
 	{
 		if (close(info->file_desc))
-			perror(info->Name_projects);
+			perror(info->name_projects);
 	}
 	free_data(info);
 	free_array_pointes(info->env);

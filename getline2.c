@@ -48,7 +48,7 @@ int logical_operations(char *cmd_array[], int num, char ops_ary[])
  * performs operations related to the program's data and execution
  * Return: The function doesn't return a value (void)
  */
-void tokenize_data(about *info)
+void tokenize_data(about_info *info)
 {
 	char *limiter = " \t";
 	int num1, num2, counter = 2, length;
@@ -70,7 +70,7 @@ void tokenize_data(about *info)
 	info->tokens = malloc(counter * sizeof(char *));
 	if (info->tokens == NULL)
 	{
-		perror(info->Name_projects);
+		perror(info->name_projects);
 		exit(errno);
 	}
 	num1 = 0;

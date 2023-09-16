@@ -3,10 +3,10 @@
 /**
  * var_expand - processes and expands variables in a given text line
  * stored in the "info" structure
- * @info: a struct of type "about" in the function "var_expand
+ * @info: a struct of type "about_info" in the function "var_expand
  * Return: does not have a return value (void)
 */
-void var_expand(about *info)
+void var_expand(about_info *info)
 {
 	int num1, num2;
 	char line[BUFFER_SIZE] = {0}, expansion[BUFFER_SIZE] = {'\0'}, *temp;
@@ -52,10 +52,10 @@ void var_expand(about *info)
 /**
  * expand_alias - searches for and expands aliases in the provided
  * input line stored in "info->get_line"
- * @info: a struct of type "about" in the function "var_expand
+ * @info: a struct of type "about_info" in the function "var_expand
  * Return: does not have a return value (void)
 */
-void expand_alias(about *info)
+void expand_alias(about_info *info)
 {
 	int i, j, was_expanded = 0;
 	char line[BUFFER_SIZE] = {0}, expansion[BUFFER_SIZE] = {'\0'}, *temp;

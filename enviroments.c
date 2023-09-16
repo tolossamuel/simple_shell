@@ -7,7 +7,7 @@
  * program-related information and environment variables
  * Return: an integer result, which is always 0 in this implementation
  */
-int env_builders(about *info)
+int env_builders(about_info *info)
 {
 	int num1;
 	char *var_copy = NULL;
@@ -52,7 +52,7 @@ int env_builders(about *info)
  * program-related information and environment variables
  * Return: 0 on success or 5 if the number of arguments is incorrect
 */
-int unset_key(about *info)
+int unset_key(about_info *info)
 {
 	if (info->tokens[1] == NULL)
 		return (0);
@@ -73,7 +73,7 @@ int unset_key(about *info)
  * program-related information and environment variables
  * Return: 0 on success or 5 if the number of arguments is incorrect
 */
-int builder_set_key(about *info)
+int builder_set_key(about_info *info)
 {
 	if (info->tokens[1] == NULL || info->tokens[2] == NULL)
 		return (0);

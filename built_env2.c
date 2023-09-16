@@ -6,7 +6,7 @@
  * Return: he result of executing the specified command or
  * -1 if the command is not found
  */
-int built_list(about *info)
+int built_list(about_info *info)
 {
 	env_structure menu_list[] = {
 		{"exit", exit_env},
@@ -37,7 +37,7 @@ int built_list(about *info)
  * Return: an integer result indicating the success or failure of changing
  * the current directory
  */
-int command_built(about *info)
+int command_built(about_info *info)
 {
 	char *dir_home = get_key("HOME", info), *dir_old = NULL;
 	char old_dir[128] = {0};
@@ -75,7 +75,7 @@ int command_built(about *info)
  * Return: It returns a success or error code based on whether it successfully
  * displays help messages or provides an error message
 */
-int help_built(about *info)
+int help_built(about_info *info)
 {
 	int num1;
 	int length = 0;

@@ -6,7 +6,7 @@
  * information related to the program's execution
  * Return: an exit status or error code
 */
-int executed(about *info)
+int executed(about_info *info)
 {
 	int num1 = 0, status;
 	pid_t pid;

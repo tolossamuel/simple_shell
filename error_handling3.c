@@ -7,14 +7,14 @@
  * @info: a pointer to a program_info struct which contains program information
  * Return: zero (0)
 */
-int handle_error(int error_code, about *info)
+int handle_error(int error_code, about_info *info)
 {
 	char arr_string[10] = {'\0'};
 
 	string_long((long) info->execute_counter, arr_string, 10);
 	if (error_code == 2 || error_code == 3)
 	{
-		_printe(info->Name_projects);
+		_printe(info->name_projects);
 		_printe(": ");
 		_printe(arr_string);
 		_printe(": ");
@@ -28,7 +28,7 @@ int handle_error(int error_code, about *info)
 	}
 	else if (error_code == 127)
 	{
-		_printe(info->Name_projects);
+		_printe(info->name_projects);
 		_printe(": ");
 		_printe(arr_string);
 		_printe(": ");
@@ -37,7 +37,7 @@ int handle_error(int error_code, about *info)
 	}
 	else if (error_code == 126)
 	{
-		_printe(info->Name_projects);
+		_printe(info->name_projects);
 		_printe(": ");
 		_printe(arr_string);
 		_printe(": ");
