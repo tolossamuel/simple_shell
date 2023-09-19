@@ -48,6 +48,7 @@ typedef struct env_structure
 } env_structure;
 
 char *strtok_fun(char *str, const char *delim, char **ptr_address);
+ssize_t getline_fun(char **ptr_lin, size_t *num, FILE *stream);
 int print_fun(char *string);
 int string_size(char *string);
 void check_file_status(int size, char *content);
@@ -60,5 +61,4 @@ char **tokenizeInput(char *input);
 void executeCommand(char **arrays);
 char *search_file_path(char *filename, char **arr);
 void exit_cmd(char **arr);
-CommandFunction env_builders(char **arv);
 #endif
