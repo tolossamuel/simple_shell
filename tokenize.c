@@ -52,7 +52,7 @@ void processUserInput(void)
 			print_fun("$ ");
 			fflush(stdout);
 		}
-		size = getline_fun(&user_input, &num2, stdin);
+		size = getline(&user_input, &num2, stdin);
 		if (size == (size_t)-1)
 		{
 			perror("getline");
