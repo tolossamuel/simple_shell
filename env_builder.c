@@ -44,3 +44,26 @@ void exit_cmd(char **arr)
 	free(arr);
 	exit(0);
 }
+
+/**
+ * check_file_status - checks the status of a file's content based
+ * on its size, and if the size is -1 (indicating an error)
+ * it frees the content and exits the program if the input is
+ * from a terminal
+ * @size: The size parameter indicates the size of the file's content
+ * @content: The content parameter is a pointer to the file's content
+ * which is freed if the size is -1
+ * Return: nothing it is void functions
+*/
+void check_file_status(int size, char *content)
+{
+	(void)content;
+	if (size == -1)
+	{
+		if (isatty(STDIN_FILENO))
+		{
+			free(content);
+		}
+		exit(0);
+	}
+}

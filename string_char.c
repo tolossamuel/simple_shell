@@ -1,29 +1,43 @@
 #include "shell.h"
 #include <errno.h>
 
+/**
+ * split_path - unction tokenize a colon-separated
+ * string path into an array of strings, where each
+ * element represents a path component
+ * @path: a string containing colon-separated path
+ * components to be split and stored in an array
+ * Return: an array of strings, with each element
+ * representing a path component extracted
+*/
 char **split_path(char *path)
 {
-	
 	char *tokenize;
 	char *cmd_path = string_repetitions(path);
 	char **array;
-	int i = 0;
-	
-	array = malloc(sizeof(char *) * (string_size(path))/2);
+	int num1 = 0;
 
+	array = malloc(sizeof(char *) * (string_size(path)) / 2);
 	tokenize = strtok(cmd_path, ":");
 	while (tokenize)
 	{
 		*array = malloc(sizeof(char) * string_size(tokenize));
-		array[i] = tokenize;
+		array[num1] = tokenize;
 		tokenize = strtok(NULL, ":");
-		i++;
+		num1++;
 	}
-	array[i] = NULL;
-
+	array[num1] = NULL;
 	return (array);
 }
 
+/**
+ * string_merging - a function concatenates two strings
+ * (string_one and string_two)
+ * @string_one: character arrays representing two separate strings
+ * @string_two: character arrays representing two separate strings
+ * Return: the merged string obtained by concatenating string_one
+ * and string_two
+*/
 char *string_merging(char *string_one, char *string_two)
 {
 	char *result;
@@ -55,6 +69,11 @@ char *string_merging(char *string_one, char *string_two)
 	return (result);
 }
 
+/**
+ * string_repetitions - duplicates a string
+ * @string: a pointer to a null-terminated character array (string)
+ * Return: duplicated copy of the input string
+*/
 char *string_repetitions(char *string)
 {
 	char *result;
