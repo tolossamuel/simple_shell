@@ -1,0 +1,37 @@
+#include "shell.h"
+
+CommandFunction env_builders(char **arv)
+{
+    int num1, num2;
+    CommandFunction result = NULL;
+
+    env_structure menu_list[] = {
+        {"exit", exit_cmd}
+       
+    };
+
+    for (num1 = 0; menu_list[num1].built_in; num1++)
+    {
+        num2 = 0;
+        if (menu_list[num1].built_in[num2] == arv[0][num2])
+        {
+            for (num2 = 0; arv[0][num2]; num2++)
+            {
+                if (menu_list[num1].built_in[num2] != arv[0][num2])
+                    break;
+            }
+            if (!arv[0][num2]) {
+                result = menu_list[num1].function;
+                break;
+            }
+        }
+    }
+
+    return result;
+}
+
+void exit_cmd(char **arr)
+{
+	free(arr);
+	exit(0);
+}
