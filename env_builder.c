@@ -12,7 +12,6 @@ CommandFunction env_builders(char **arv)
 	CommandFunction result = NULL;
 	env_structure menu_list[] = {
 		{"exit", exit_cmd},
-		{'NULL', NULL}
 	};
 
 	for (num1 = 0; menu_list[num1].built_in; num1++)

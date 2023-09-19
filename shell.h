@@ -11,7 +11,17 @@
 #include <errno.h>
 extern char **environ;
 
-
+/**
+ * struct about_info - pattern for the simple shell
+ * @alias_list: An array of strings to store alias definitions
+ * @tokens: An array of strings to store command tokens
+ * @cmd_name: A string representing the command name
+ * @name_projects: A string representing the name of the project
+ * @execute_counter: An integer to keep track of the execution count
+ * @file_desc: An integer representing a file descriptor
+ * @get_line:  A string to store a line of input
+ * @env: An array of strings to store environment variables
+ */
 typedef struct about_info
 {
 	char **alias_list;
@@ -23,7 +33,14 @@ typedef struct about_info
 	char *get_line;
 	char **env;
 } about_info;
+
 typedef void (*CommandFunction)(char **);
+
+/**
+ * struct env_structure - is a struct used to associate
+ * @built_in: command names with their corresponding
+ * @function: pointers for execution
+ */
 typedef struct env_structure
 {
 	char *built_in;
@@ -36,12 +53,9 @@ int print_fun(char *string);
 int string_size(char *string);
 char *string_merging(char *string_one, char *string_two);
 char *string_repetitions(char *string);
-
-
 char **split_path(char *path);
 char *file_path(const char *name);
 char *search_file_path(char *filename, char **arr);
 void exit_cmd(char **arr);
 CommandFunction env_builders(char **arv);
-
-#endif 
+#endif
