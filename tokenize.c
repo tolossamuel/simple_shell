@@ -53,17 +53,13 @@ void processUserInput(void)
 			fflush(stdout);
 		}
 		size = getline(&user_input, &num2, stdin);
-
 		if (size == (size_t)-1)
 		{
 			perror("getline");
 			free(user_input);
 			exit(1);
 		}
-		if (size > 0 && user_input[size - 1] == '\n')
-		{
-			user_input[size - 1] = '\0';
-		}
+		user_input[size - 1] = '\0';
 		arrays = tokenizeInput(user_input);
 		functions = env_builders(arrays);
 		if (functions)
