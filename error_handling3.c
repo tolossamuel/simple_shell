@@ -10,6 +10,7 @@
 int handle_error(int error_code, about_info *info)
 {
 	char arr_string[10] = {'\0'};
+
 	string_long((long) info->execute_counter, arr_string, 10);
 	if (error_code == 2 || error_code == 3)
 	{

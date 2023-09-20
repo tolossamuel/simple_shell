@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * supportive_func - supportive functions for betty style code
+ * supportive_fun - supportive functions for betty style code
  * which functions contains more than 40 line of codes
  * @info: pointes for the functions
  * Return: nothings void functions
