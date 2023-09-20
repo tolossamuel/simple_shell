@@ -10,10 +10,12 @@ CommandFunction env_builders(char **arv)
 {
 	int num1, num2;
 	CommandFunction result = NULL;
+
 	env_structure menu_list[] = {
 		{"exit", exit_cmd},
 	};
-
+	if (arv == NULL || arv[0] == NULL)
+		return (NULL);
 	for (num1 = 0; menu_list[num1].built_in; num1++)
 	{
 		num2 = 0;

@@ -39,42 +39,53 @@ int main(int argc, char *argv[])
 */
 void executeCommand(char **arrays, char *symbol)
 {
-	int num3;
-	char *path;
+    int num3;
+    char *path;
 
-	if (access(arrays[0], X_OK) != -1)
-	{
-		num3 = fork();
-		if (num3 == 0)
-		{
-			execve(arrays[0], arrays, environ);
-			perror("execve");
-			exit(1);
-		} else
-		{
-			wait(NULL);
-		}
-	} else
-	{
-		path = search_file_path(arrays[0], split_path(file_path("PATH")));
-		if (path)
-		{
-			if (access(path, X_OK) != -1)
-			{
-				num3 = fork();
-				if (num3 == 0)
-				{
-					execve(path, arrays, environ);
-					perror("execve");
-					exit(1);
-				} else
-				{
-					wait(NULL);
-				}
-			} else
-				perror(arrays[0]);
-			free(path);
-		} else
-			perror(symbol);
-	}
+    if (arrays == NULL || arrays[0] == NULL)
+    {
+        
+        return; 
+    }
+
+    if (access(arrays[0], X_OK) != -1)
+    {
+        num3 = fork();
+        if (num3 == 0)
+        {
+            execve(arrays[0], arrays, environ);
+            perror("execve");
+            exit(1);
+        }
+        else
+        {
+            wait(NULL);
+        }
+    }
+    else
+    {
+        path = search_file_path(arrays[0], split_path(file_path("PATH")));
+        if (path)
+        {
+            if (access(path, X_OK) != -1)
+            {
+                num3 = fork();
+                if (num3 == 0)
+                {
+                    execve(path, arrays, environ);
+                    perror("execve");
+                    exit(1);
+                }
+                else
+                {
+                    wait(NULL);
+                }
+            }
+            else
+                perror(arrays[0]);
+            free(path);
+        }
+        else
+            perror(symbol);
+    }
 }
