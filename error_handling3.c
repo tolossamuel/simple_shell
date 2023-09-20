@@ -14,44 +14,57 @@ int handle_error(int error_code, about_info *info)
 	string_long((long) info->execute_counter, arr_string, 10);
 	if (error_code == 2 || error_code == 3)
 	{
-		print_fun(info->name_projects);
-		print_fun(": ");
-		print_fun(": ");
-		print_fun(info->tokens[0]);
+		_printe(info->name_projects);
+		_printe(": ");
+		_printe(arr_string);
+		_printe(": ");
+		_printe(info->tokens[0]);
 		if (error_code == 2)
-			print_fun(": unexpected number: ");
+			_printe(": ERROR (unexpected number): ");
 		else
-			print_fun(": not redirect): ");
-		print_fun(info->tokens[1]);
-		print_fun("\n");
+			_printe(": ERROR (can not redirect): ");
+		_printe(info->tokens[1]);
+		_printe("\n");
 	}
 	else if (error_code == 127)
 	{
-		print_fun(info->name_projects);
-		print_fun(": ");
-		print_fun(info->cmd_name);
-		print_fun(": not found\n");
+		_printe(info->name_projects);
+		_printe(": ");
+		_printe(arr_string);
+		_printe(": ");
+		_printe(info->cmd_name);
+		_printe(": ERROR (not found)\n");
 	}
 	else if (error_code == 126)
 	{
-		print_fun(info->name_projects);
-		print_fun(": ");
-		print_fun(info->cmd_name);
-		print_fun(": no permission\n");
+		_printe(info->name_projects);
+		_printe(": ");
+		_printe(arr_string);
+		_printe(": ");
+		_printe(info->cmd_name);
+		_printe(": ERROR (no permission)\n");
 	}
 	return (0);
 }
 
 /**
- * print_fun - Print a string to the standard error stream
+ * _printe - Print a string to the standard error stream
  * @string: a pointer to a character string that needs to be printed
  * Return: the number of characters written to the respective output stream
 */
-int print_fun(char *string)
+int _printe(char *string)
 {
 	return (write(STDERR_FILENO, string, string_size(string)));
 }
-
+/**
+ * _print - Print a string to the standard output stream
+ * @string: a pointer to a character string that needs to be printed
+ * Return: the number of characters written to the respective output stream
+ */
+int _print(char *string)
+{
+	return (write(STDOUT_FILENO, string, string_size(string)));
+}
 
 /**
  * string_repetitions - duplicates a string

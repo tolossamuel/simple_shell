@@ -5,5 +5,8 @@
 		"inicialize",
 		"printe",
 		"readed"
-	]
+	],
+	"files.associations": {
+		"stat.h": "c"
+	}
 }

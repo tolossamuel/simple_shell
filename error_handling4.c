@@ -91,11 +91,7 @@ char *string_merging(char *string_one, char *string_two)
 
 	for (num1 = 0; string_one[num1] != '\0'; num1++)
 		result[num1] = string_one[num1];
-	if (string_one)
-	{
-		free(string_one);
-	}
-	string_one = NULL;
+	free(string_one);
 	for (num2 = 0; string_two[num2] != '\0'; num2++)
 	{
 		result[num1] = string_two[num2];

@@ -18,7 +18,7 @@ int search_file(about_info *info)
 		return (2);
 	if (info->cmd_name[0] == '/' || info->cmd_name[0] == '.')
 		return (check(info->cmd_name));
-	info_toke_free(info);
+	free(info->tokens[0]);
 	info->tokens[0] = string_merging(string_repetitions("/"), info->cmd_name);
 	if (!info->tokens[0])
 		return (2);
@@ -35,14 +35,15 @@ int search_file(about_info *info)
 		if (ret_code == 0 || ret_code == 126)
 		{
 			errno = 0;
-			info_toke_free(info);
+			free(info->tokens[0]);
 			info->tokens[0] = string_repetitions(directories[num1]);
-			supportive_free_fun(directories);
+			free_array_pointes(directories);
 			return (ret_code);
 		}
 	}
-	info_toke_free(info);
-	supportive_free_fun(directories);
+	free(info->tokens[0]);
+	info->tokens[0] = NULL;
+	free_array_pointes(directories);
 	return (ret_code);
 }
 
@@ -78,10 +79,7 @@ char **path_of_file(about_info *info)
 	{
 		tokens[i] = string_repetitions(str_tok(NULL, ":"));
 	}
-	if (PATH)
-	{
-		free(PATH);
-	}
+	free(PATH);
 	PATH = NULL;
 	return (tokens);
 }

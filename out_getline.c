@@ -20,10 +20,7 @@ int _getline(about_info *info)
 	{
 		for (i = 0; array_commands[i]; i++)
 		{
-			if (array_commands[i])
-			{
-				free(array_commands[i]);
-			}
+			free(array_commands[i]);
 			array_commands[i] = NULL;
 		}
 		bytes_read = read(info->file_desc, &buff, BUFFER_SIZE - 1);

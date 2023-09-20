@@ -58,7 +58,7 @@ int printf_fun(about_info *info, char *name)
 				new_buffer(buffer, "'");
 				new_buffer(buffer, info->alias_list[num1] + num2 + 1);
 				new_buffer(buffer, "'\n");
-				print_fun(buffer);
+				_print(buffer);
 			}
 		}
 	}
@@ -93,11 +93,7 @@ int set_fun(char *alias_string, about_info *info)
 		if (string_comparions(buffer, info->alias_list[num2], num1) &&
 			info->alias_list[num2][num1] == '=')
 		{
-			if (info->alias_list[num2])
-			{
-				free(info->alias_list[num2]);
-			}
-			info->alias_list[num2] = NULL;
+			free(info->alias_list[num2]);
 			break;
 		}
 

@@ -23,11 +23,7 @@ int logical_operations(char *cmd_array[], int num, char ops_ary[])
 			cmd_array[num + 1] = string_repetitions(temporary + num1 + 2);
 			num++;
 			ops_ary[num] = '&';
-			if (temporary)
-			{
-				free(temporary);
-			}
-			temporary = NULL;
+			free(temporary);
 			num1 = 0;
 		}
 		if (cmd_array[num][num1] == '|' && cmd_array[num][num1 + 1] == '|')
@@ -38,11 +34,7 @@ int logical_operations(char *cmd_array[], int num, char ops_ary[])
 			cmd_array[num + 1] = string_repetitions(temporary + num1 + 2);
 			num++;
 			ops_ary[num] = '|';
-			if (temporary)
-			{
-				free(temporary);
-			}
-			temporary = NULL;
+			free(temporary);
 			num1 = 0;
 		}
 	}

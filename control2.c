@@ -49,11 +49,7 @@ int set_key(char *key, char *value, about_info *info)
 		 info->env[i][key_length] == '=')
 		{
 			is_new_key = 0;
-			if (info->env[i])
-			{
-				free(info->env[i]);
-			}
-			info->env[i] = NULL;
+			free(info->env[i]);
 			break;
 		}
 	}
@@ -78,8 +74,8 @@ void env_print(about_info *info)
 
 	for (num1 = 0; info->env[num1]; num1++)
 	{
-		print_fun(info->env[num1]);
-		print_fun("\n");
+		_print(info->env[num1]);
+		_print("\n");
 	}
 }
 
@@ -103,11 +99,7 @@ int remove_key(char *key, about_info *info)
 		if (string_comparions(key, info->env[num1], key_length) &&
 		 info->env[num1][key_length] == '=')
 		{
-			if (info->env[num1])
-			{
-				free(info->env[num1]);
-			}
-			info->env[num1] = NULL;
+			free(info->env[num1]);
 			num1++;
 			for (; info->env[num1]; num1++)
 			{

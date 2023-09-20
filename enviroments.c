@@ -27,17 +27,13 @@ int env_builders(about_info *info)
 				env_print(info);
 				if (get_key(cmd_name, info) == NULL)
 				{
-					print_fun(info->tokens[1]);
-					print_fun("\n");
+					_print(info->tokens[1]);
+					_print("\n");
 				}
 				else
 				{
 					set_key(cmd_name, var_copy, info);
-					if (var_copy)
-					{
-						free(var_copy);
-					}
-					var_copy = NULL;
+					free(var_copy);
 				}
 				return (0);
 			}

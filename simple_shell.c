@@ -41,8 +41,8 @@ int main(int argc, char *argv[], char *env[])
  */
 void handle_short_cut(int operations UNUSED)
 {
-	print_fun("\n");
-	print_fun(PROMPT_MSG);
+	_print("\n");
+	_print(PROMPT_MSG);
 }
 
 /**
@@ -72,10 +72,10 @@ void start_with(about_info *info, int argc, char *argv[], char **env)
 		info->file_desc = open(argv[1], O_RDONLY);
 		if (info->file_desc == -1)
 		{
-			print_fun(info->name_projects);
-			print_fun(": 0: does not open ");
-			print_fun(argv[1]);
-			print_fun("\n");
+			_printe(info->name_projects);
+			_printe(": 0: does not open ");
+			_printe(argv[1]);
+			_printe("\n");
 			exit(127);
 		}
 	}
@@ -111,7 +111,7 @@ void size_of_(char *prompt, about_info *info)
 
 	while (++(info->execute_counter))
 	{
-		print_fun(prompt);
+		_print(prompt);
 		error_code = string_len = _getline(info);
 		if (error_code == EOF)
 		{
@@ -129,15 +129,7 @@ void size_of_(char *prompt, about_info *info)
 				if (error_code != 0)
 					handle_error(error_code, info);
 			}
-			if (info->tokens != NULL)
-				free(info->tokens);
-			if (info->get_line != NULL)
-				free(info->get_line);
-			if (info->cmd_name != NULL)
-				free(info->cmd_name);
-			info->get_line = NULL;
-			info->cmd_name = NULL;
-			info->tokens = NULL;
+			free_data(info);
 		}
 	}
 }

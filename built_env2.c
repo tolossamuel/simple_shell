@@ -50,8 +50,8 @@ int command_built(about_info *info)
 			dir_old = get_key("OLDPWD", info);
 			if (dir_old)
 				error_code = set_dir(info, dir_old);
-			print_fun(get_key("PWD", info));
-			print_fun("\n");
+			_print(get_key("PWD", info));
+			_print("\n");
 			return (error_code);
 		}
 		else
@@ -84,7 +84,7 @@ int help_built(about_info *info)
 	messages[0] = HELP_MSG;
 	if (info->tokens[1] == NULL)
 	{
-		print_fun(messages[0] + 6);
+		_print(messages[0] + 6);
 		return (1);
 	}
 	if (info->tokens[2] != NULL)
@@ -103,7 +103,7 @@ int help_built(about_info *info)
 		length = string_size(info->tokens[1]);
 		if (string_comparions(info->tokens[1], messages[num1], length))
 		{
-			print_fun(messages[num1] + length + 1);
+			_print(messages[num1] + length + 1);
 			return (1);
 		}
 	}

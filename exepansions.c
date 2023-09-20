@@ -1,13 +1,11 @@
 #include "shell.h"
 
-
 /**
  * var_expand - processes and expands variables in a given text line
  * stored in the "info" structure
  * @info: a struct of type "about_info" in the function "var_expand
  * Return: does not have a return value (void)
 */
-
 void var_expand(about_info *info)
 {
 	int num1, num2;
@@ -46,7 +44,7 @@ void var_expand(about_info *info)
 		}
 	if (!string_comparions(info->get_line, line, 0))
 	{
-		supportive_fun(info);
+		free(info->get_line);
 		info->get_line = string_repetitions(line);
 	}
 }
@@ -59,24 +57,24 @@ void var_expand(about_info *info)
 */
 void expand_alias(about_info *info)
 {
-	int num1, num2, was_expanded = 0;
+	int i, j, was_expanded = 0;
 	char line[BUFFER_SIZE] = {0}, expansion[BUFFER_SIZE] = {'\0'}, *temp;
 
 	if (info->get_line == NULL)
 		return;
 	new_buffer(line, info->get_line);
-	for (num1 = 0; line[num1]; num1++)
+	for (i = 0; line[i]; i++)
 	{
-		for (num2 = 0; line[num1 + num2] && line[num1 + num2] != ' '; num2++)
-			expansion[num2] = line[num1 + num2];
-		expansion[num2] = '\0';
+		for (j = 0; line[i + j] && line[i + j] != ' '; j++)
+			expansion[j] = line[i + j];
+		expansion[j] = '\0';
 
 		temp = get_fun(info, expansion);
 		if (temp)
 		{
 			expansion[0] = '\0';
-			new_buffer(expansion, line + num1 + num2);
-			line[num1] = '\0';
+			new_buffer(expansion, line + i + j);
+			line[i] = '\0';
 			new_buffer(line, temp);
 			line[string_size(line)] = '\0';
 			new_buffer(line, expansion);
@@ -86,11 +84,7 @@ void expand_alias(about_info *info)
 	}
 	if (was_expanded)
 	{
-		if (info->get_line)
-		{
-			free(info->get_line);
-		}
-		info->get_line = NULL;
+		free(info->get_line);
 		info->get_line = string_repetitions(line);
 	}
 }

@@ -71,6 +71,8 @@ int executed(about_info *info);
 int built_list(about_info *info);
 char **path_of_file(about_info *info);
 int search_file(about_info *info);
+void free_array_pointes(char **array);
+void free_data(about_info *info);
 void free_all(about_info *info);
 int exit_env(about_info *info);
 int command_built(about_info *info);
@@ -84,7 +86,8 @@ char *get_key(char *key, about_info *info);
 int set_key(char *key, char *value, about_info *info);
 int remove_key(char *key, about_info *info);
 void env_print(about_info *info);
-int print_fun(char *string);
+int _print(char *string);
+int _printe(char *string);
 int handle_error(int error_code, about_info *info);
 int string_size(char *string);
 char *string_repetitions(char *string);
@@ -98,8 +101,5 @@ int printf_fun(about_info *info, char *name);
 char *get_fun(about_info *info, char *name);
 int set_fun(char *alias_string, about_info *info);
 int check(char *file_path);
-void supportive_fun(about_info *info);
-void supportive_free_fun(char **directories);
-void info_toke_free(about_info *info);
 
 #endif /* SHELL_H */
