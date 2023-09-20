@@ -115,7 +115,8 @@ void size_of_(char *prompt, about_info *info)
 		error_code = string_len = _getline(info);
 		if (error_code == EOF)
 		{
-			free_all(info);
+			free(info);
+			info = NULL;
 			exit(errno);
 		}
 		if (string_len >= 1)
@@ -129,7 +130,8 @@ void size_of_(char *prompt, about_info *info)
 				if (error_code != 0)
 					handle_error(error_code, info);
 			}
-			free_data(info);
+			free(info);
+			info = NULL;
 		}
 	}
 }

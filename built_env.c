@@ -24,7 +24,8 @@ int exit_env(about_info *info)
 	}
 	if (info != NULL)
 	{
-		free_all(info);
+		free(info);
+		info = NULL;
 	}
 	exit(errno);
 }

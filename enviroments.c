@@ -34,6 +34,7 @@ int env_builders(about_info *info)
 				{
 					set_key(cmd_name, var_copy, info);
 					free(var_copy);
+					var_copy = NULL;
 				}
 				return (0);
 			}

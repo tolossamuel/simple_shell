@@ -94,6 +94,7 @@ int set_fun(char *alias_string, about_info *info)
 			info->alias_list[num2][num1] == '=')
 		{
 			free(info->alias_list[num2]);
+			info->alias_list[num2] = NULL;
 			break;
 		}
 

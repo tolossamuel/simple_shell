@@ -9,14 +9,10 @@
 */
 int string_size(char *string)
 {
-	int counter = 0;
-
-	if (string == NULL)
-		return (0);
-	while (string[counter++] != '\0')
-	{
-	}
-	return (counter - 1);
+	int co = 0;
+	while(string[co] != '\0')
+		co++;
+	return (co);
 }
 
 /**
@@ -72,33 +68,35 @@ int string_comparions(char *string_one, char *string_two, int number)
 */
 char *string_merging(char *string_one, char *string_two)
 {
-	char *result;
-	int num1 = 0, num2 = 0;
+	char *p;
+	unsigned int i = 0;
+	int len = 0;
+	int len2 = 0;
+	int j = 0;
 
-	if (string_one == NULL)
-		string_one = "";
-	num1 = string_size(string_one);
-	if (string_two == NULL)
-		string_two = "";
-	num2 = string_size(string_two);
-	result = malloc(sizeof(char) * (num1 + num2 + 1));
-	if (result == NULL)
+	if (string_one)
+		while (string_one[len])
+			len++;
+	if (string_two)
+		while (string_two[len2])
+			len2++;
+	p = (char *) malloc(sizeof(char) * (len + len2 + 1));
+	if (p == NULL)
+		return (0);
+	while (string_one != NULL && string_one[i] != '\0')
 	{
-		errno = ENOMEM;
-		perror("ERROR");
-		return (NULL);
+		*(p + i) = string_one[i];
+		i++;
+	}
+	while (string_two != NULL && string_two[j] != '\0')
+	{
+		*(p + i + j) = string_two[j];
+		j++;
 	}
 
-	for (num1 = 0; string_one[num1] != '\0'; num1++)
-		result[num1] = string_one[num1];
-	free(string_one);
-	for (num2 = 0; string_two[num2] != '\0'; num2++)
-	{
-		result[num1] = string_two[num2];
-		num1++;
-	}
-	result[num1] = '\0';
-	return (result);
+
+	*(p + i + j) = '\0';
+	return (p);
 }
 
 /**

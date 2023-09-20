@@ -37,13 +37,15 @@ int search_file(about_info *info)
 			errno = 0;
 			free(info->tokens[0]);
 			info->tokens[0] = string_repetitions(directories[num1]);
-			free_array_pointes(directories);
+			free(directories);
+			directories = NULL;
 			return (ret_code);
 		}
 	}
 	free(info->tokens[0]);
 	info->tokens[0] = NULL;
-	free_array_pointes(directories);
+	free(directories);
+	directories = NULL;
 	return (ret_code);
 }
 

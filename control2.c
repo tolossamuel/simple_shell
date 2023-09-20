@@ -50,6 +50,7 @@ int set_key(char *key, char *value, about_info *info)
 		{
 			is_new_key = 0;
 			free(info->env[i]);
+			info->env[i] = NULL;
 			break;
 		}
 	}
@@ -100,6 +101,7 @@ int remove_key(char *key, about_info *info)
 		 info->env[num1][key_length] == '=')
 		{
 			free(info->env[num1]);
+			info->env[num1] = NULL;
 			num1++;
 			for (; info->env[num1]; num1++)
 			{
