@@ -37,58 +37,58 @@ char **tokenizeInput(char *input)
  * a continuous shell environment
  * Return: nothing void functions
 */
-void processUserInput(void)
+void processUserInput(char *name)
 {
-	char **arrays, *user_input;
-	size_t num2, size;
-	CommandFunction functions;
-	char *symbol = "$ ";
+    char **arrays, *user_input;
+    size_t num2, size;
+    CommandFunction functions;
 
-	while (1)
-	{
-		num2 = 0;
-		user_input = NULL;
-		if (isatty(STDIN_FILENO))
-		{
-			print_fun(symbol);
-			fflush(stdout);
-		}
+    while (1)
+    {
+        num2 = 0;
+        user_input = NULL;
 
-		if (isatty(STDIN_FILENO))
-		{
-			size = getline(&user_input, &num2, stdin);
-		}
-		else
-		{
-			user_input = (char *)malloc(sizeof(char) * 1024);
-			if (user_input == NULL)
-			{
-				perror("malloc");
-				exit(1);
-			}
-			if (fgets(user_input, 1024, stdin) == NULL)
-			{
-				free(user_input);
-				exit(1);
-			}
-			size = strlen(user_input);  
-		}
+        if (isatty(STDIN_FILENO))
+        {
+            print_fun("$ ");
+            fflush(stdout);
+        }
 
-		if (size == (size_t)-1)
-		{
-			perror("getline");
-			free(user_input);
-			exit(1);
-		}
-		user_input[size - 1] = '\0';
-		arrays = tokenizeInput(user_input);
-		functions = env_builders(arrays);
-		if (functions)
-		{
-			free(user_input);
-			functions(arrays);
-		}
-		executeCommand(arrays,symbol);
-		free(user_input);
-	}
+        if (isatty(STDIN_FILENO))
+        {
+            size = getline(&user_input, &num2, stdin);
+        }
+        else
+        {
+            user_input = (char *)malloc(sizeof(char) * 1024);
+            if (user_input == NULL)
+            {
+                perror("malloc");
+                exit(1);
+            }
+            if (fgets(user_input, 1024, stdin) == NULL)
+            {
+                free(user_input);
+                exit(1);
+            }
+            size = strlen(user_input);
+        }
+
+        if (size == (size_t)-1)
+        {
+            perror("getline");
+            free(user_input);
+            exit(1);
+        }
+        user_input[size - 1] = '\0';
+        arrays = tokenizeInput(user_input);
+        functions = env_builders(arrays);
+        if (functions)
+        {
+            free(user_input);
+            functions(arrays);
+        }
+        executeCommand(arrays,name);
+        free(user_input);
+    }
 }

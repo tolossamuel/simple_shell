@@ -54,11 +54,12 @@ int string_size(char *string);
 void check_file_status(int size, char *content);
 char *string_merging(char *string_one, char *string_two);
 char *string_repetitions(char *string);
-void processUserInput(void);
+void processUserInput(char *name);
 char **split_path(char *path);
 char *file_path(const char *name);
 char **tokenizeInput(char *input);
 void executeCommand(char **arrays, char *symbol);
+
 char *search_file_path(char *filename, char **arr);
 void exit_cmd(char **arr);
 CommandFunction env_builders(char **arv);

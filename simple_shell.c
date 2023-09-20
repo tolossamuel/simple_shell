@@ -4,10 +4,30 @@
  * main - function initializes a program structure
  * Return: zero (0)
 */
-int main(void)
+int main(int argc, char *argv[])
 {
-	processUserInput();
-	return (0);
+    
+    char *executable_name = strrchr(argv[0], '/');
+	char *prompt;
+	argc = 1;
+    if (executable_name && argc) {
+        executable_name++; 
+    } else {
+        executable_name = argv[0]; 
+    }
+
+    prompt = malloc(strlen(executable_name) + 1); 
+    if (prompt == NULL) {
+        perror("malloc");
+        return 1;
+    }
+
+    strcpy(prompt, executable_name);
+
+    processUserInput(argv[0]);
+
+    free(prompt);
+    return 0;
 }
 
 /**
