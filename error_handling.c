@@ -47,13 +47,8 @@ void free_all(about_info *info)
 */
 void free_array_pointes(char **array)
 {
-	int num1;
-
 	if (array != NULL)
 	{
-		for (num1 = 0; array[num1]; num1++)
-			free(array[num1]);
-
 		free(array);
 		array = NULL;
 	}
