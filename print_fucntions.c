@@ -19,12 +19,12 @@ int print_fun(char *string)
  */
 int string_size(char *string)
 {
-	int counter = 0;
+	int i = 0;
 
-	if (string == NULL)
+	if (!string)
 		return (0);
-	while (string[counter++] != '\0')
-	{
-	}
-	return (counter - 1);
+
+	while (*string++)
+		i++;
+	return (i);
 }

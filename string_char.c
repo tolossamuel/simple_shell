@@ -40,33 +40,14 @@ char **split_path(char *path)
 */
 char *string_merging(char *string_one, char *string_two)
 {
-	char *result;
-	int num1 = 0, num2 = 0;
+	char *ret = string_one;
 
-	if (string_one == NULL)
-		string_one = "";
-	num1 = string_size(string_one);
-	if (string_two == NULL)
-		string_two = "";
-	num2 = string_size(string_two);
-	result = malloc(sizeof(char) * (num1 + num2 + 1));
-	if (result == NULL)
-	{
-		errno = ENOMEM;
-		perror("ERROR");
-		return (NULL);
-	}
-
-	for (num1 = 0; string_one[num1] != '\0'; num1++)
-		result[num1] = string_one[num1];
-	free(string_one);
-	for (num2 = 0; string_two[num2] != '\0'; num2++)
-	{
-		result[num1] = string_two[num2];
-		num1++;
-	}
-	result[num1] = '\0';
-	return (result);
+	while (*string_one)
+		string_one++;
+	while (*string_two)
+		*string_one++ = *string_two++;
+	*string_one = *string_two;
+	return (ret);
 }
 
 /**
@@ -76,26 +57,17 @@ char *string_merging(char *string_one, char *string_two)
 */
 char *string_repetitions(char *string)
 {
-	char *result;
-	int length, num1;
+	int length = 0;
+	char *ret;
 
 	if (string == NULL)
 		return (NULL);
-
-	length = string_size(string) + 1;
-
-	result = malloc(sizeof(char) * length);
-
-	if (result == NULL)
-	{
-		errno = ENOMEM;
-		perror("ERROR");
+	while (*string++)
+		length++;
+	ret = malloc(sizeof(char) * (length + 1));
+	if (!ret)
 		return (NULL);
-	}
-	for (num1 = 0; num1 < length ; num1++)
-	{
-		result[num1] = string[num1];
-	}
-
-	return (result);
+	for (length++; length--;)
+		ret[length] = *--string;
+	return (ret);
 }

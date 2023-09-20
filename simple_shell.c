@@ -48,7 +48,9 @@ void executeCommand(char **arrays, char *symbol)
 	char *path;
 
 	if (arrays == NULL || arrays[0] == NULL)
+	{
 		return;
+	}
 	if (access(arrays[0], X_OK) != -1)
 	{
 		num3 = fork();
@@ -59,9 +61,12 @@ void executeCommand(char **arrays, char *symbol)
 			exit(1);
 		}
 		else
+		{
 			wait(NULL);
+		}
 	}
 	else
+	{
 		path = search_file_path(arrays[0], split_path(file_path("PATH")));
 		if (path)
 		{
@@ -75,12 +80,19 @@ void executeCommand(char **arrays, char *symbol)
 					exit(1);
 				}
 				else
+				{
 					wait(NULL);
+				}
 			}
 			else
+			{
 				perror(arrays[0]);
+			}
 			free(path);
 		}
 		else
+		{
 			perror(symbol);
+		}
+	}
 }
