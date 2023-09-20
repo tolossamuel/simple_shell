@@ -42,6 +42,7 @@ void processUserInput(void)
 	char **arrays, *user_input;
 	size_t num2, size;
 	CommandFunction functions;
+	char *symbol = "$ ";
 
 	while (1)
 	{
@@ -49,7 +50,7 @@ void processUserInput(void)
 		user_input = NULL;
 		if (isatty(STDIN_FILENO))
 		{
-			print_fun("$ ");
+			print_fun(symbol);
 			fflush(stdout);
 		}
 
@@ -58,25 +59,36 @@ void processUserInput(void)
 			size = getline(&user_input, &num2, stdin);
 		}
 		else
+		{
 			user_input = (char *)malloc(sizeof(char) * 1024);
 			if (user_input == NULL)
+			{
 				perror("malloc");
 				exit(1);
+			}
 			if (fgets(user_input, 1024, stdin) == NULL)
+			{
 				free(user_input);
 				exit(1);
-			size = strlen(user_input);
+			}
+			size = strlen(user_input);  
+		}
+
 		if (size == (size_t)-1)
+		{
 			perror("getline");
 			free(user_input);
 			exit(1);
+		}
 		user_input[size - 1] = '\0';
 		arrays = tokenizeInput(user_input);
 		functions = env_builders(arrays);
 		if (functions)
+		{
 			free(user_input);
 			functions(arrays);
-		executeCommand(arrays);
+		}
+		executeCommand(arrays,symbol);
 		free(user_input);
 	}
 }

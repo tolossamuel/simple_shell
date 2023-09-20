@@ -58,7 +58,7 @@ void processUserInput(void);
 char **split_path(char *path);
 char *file_path(const char *name);
 char **tokenizeInput(char *input);
-void executeCommand(char **arrays);
+void executeCommand(char **arrays, char *symbol);
 char *search_file_path(char *filename, char **arr);
 void exit_cmd(char **arr);
 CommandFunction env_builders(char **arv);

@@ -17,7 +17,7 @@ int main(void)
  * typically representing command-line arguments
  * Return: nothing it void functions
 */
-void executeCommand(char **arrays)
+void executeCommand(char **arrays, char *symbol)
 {
 	int num3;
 	char *path;
@@ -55,6 +55,6 @@ void executeCommand(char **arrays)
 				perror(arrays[0]);
 			free(path);
 		} else
-			perror(arrays[0]);
+			perror(symbol);
 	}
 }
